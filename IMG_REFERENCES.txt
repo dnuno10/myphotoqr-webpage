@@ -1,0 +1,16 @@
+Replace these referenced images with your final files:
+
+img/logo-myphotoqr.jpg
+img/favicon.jpg
+img/og-myphotoqr.jpg
+img/home-phone-mockup.jpg
+img/event-collage.jpg
+img/icon-gallery.png
+img/icon-qr.png
+img/icon-upload.png
+img/icon-slideshow.png
+img/icon-download.png
+img/feature-branding.jpg
+img/feature-upload.jpg
+img/feature-slideshow.jpg
+img/feature-export.jpg
