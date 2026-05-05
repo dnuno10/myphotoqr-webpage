@@ -65,22 +65,22 @@ def head(title, desc, canonical, extra=''):
   <meta name="keywords" content="{keywords_meta}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="author" content="MyPhotoQR">
-  <link rel="canonical" href="https://myphotoqr.com/{canonical}">
+  <link rel="canonical" href="https://www.myphotoqr.com/{canonical}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
-  <meta property="og:url" content="https://myphotoqr.com/{canonical}">
-  <meta property="og:image" content="https://myphotoqr.com/img/og-myphotoqr.jpg">
+  <meta property="og:url" content="https://www.myphotoqr.com/{canonical}">
+  <meta property="og:image" content="https://www.myphotoqr.com/img/og-myphotoqr.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{title}">
   <meta name="twitter:description" content="{desc}">
-  <meta name="twitter:image" content="https://myphotoqr.com/img/og-myphotoqr.jpg">
+  <meta name="twitter:image" content="https://www.myphotoqr.com/img/og-myphotoqr.jpg">
   <link rel="icon" href="img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MyPhotoQR","applicationCategory":"MultimediaApplication","operatingSystem":"Web","offers":{{"@type":"Offer","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}},"description":"A no-app QR album for event photo and video sharing.","url":"https://myphotoqr.com"}}</script>
+  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MyPhotoQR","applicationCategory":"MultimediaApplication","operatingSystem":"Web","offers":{{"@type":"Offer","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}},"description":"A no-app QR album for event photo and video sharing.","url":"https://www.myphotoqr.com"}}</script>
   {extra}
 </head>'''
 
