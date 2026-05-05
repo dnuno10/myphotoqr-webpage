@@ -75,7 +75,7 @@ def head(title, desc, canonical, extra=''):
   <meta name="twitter:title" content="{title}">
   <meta name="twitter:description" content="{desc}">
   <meta name="twitter:image" content="https://myphotoqr.com/img/og-myphotoqr.jpg">
-  <link rel="icon" href="img/favicon.jpg">
+  <link rel="icon" href="img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -229,4 +229,4 @@ js="""const menuButton=document.querySelector('[data-menu-toggle]');const nav=do
 (root/'js/main.js').write_text(js,encoding='utf-8')
 
 # placeholder manifest
-(root/'IMG_REFERENCES.txt').write_text('''Replace these referenced images with your final files:\n\nimg/logo-myphotoqr.jpg\nimg/favicon.jpg\nimg/og-myphotoqr.jpg\nimg/home-phone-mockup.jpg\nimg/event-collage.jpg\nimg/icon-gallery.png\nimg/icon-qr.png\nimg/icon-upload.png\nimg/icon-slideshow.png\nimg/icon-download.png\nimg/feature-branding.jpg\nimg/feature-upload.jpg\nimg/feature-slideshow.jpg\nimg/feature-export.jpg\n''',encoding='utf-8')
+(root/'IMG_REFERENCES.txt').write_text('''Replace these referenced images with your final files:\n\nimg/logo-myphotoqr.jpg\nimg/favicon.png\nimg/og-myphotoqr.jpg\nimg/home-phone-mockup.jpg\nimg/event-collage.jpg\nimg/icon-gallery.png\nimg/icon-qr.png\nimg/icon-upload.png\nimg/icon-slideshow.png\nimg/icon-download.png\nimg/feature-branding.jpg\nimg/feature-upload.jpg\nimg/feature-slideshow.jpg\nimg/feature-export.jpg\n''',encoding='utf-8')

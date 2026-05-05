@@ -1,7 +1,7 @@
 Replace these referenced images with your final files:
 
 img/logo-myphotoqr.jpg
-img/favicon.jpg
+img/favicon.png
 img/og-myphotoqr.jpg
 img/home-phone-mockup.jpg
 img/event-collage.jpg
