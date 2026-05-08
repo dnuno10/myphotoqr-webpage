@@ -1,6 +1,7 @@
 from pathlib import Path
 
-root=Path('/mnt/data/myphotoqr_site')
+# Generate into the repository root (same folder as this script).
+root = Path(__file__).resolve().parent
 (root/'css').mkdir(exist_ok=True)
 (root/'js').mkdir(exist_ok=True)
 (root/'img').mkdir(exist_ok=True)
@@ -8,30 +9,19 @@ root=Path('/mnt/data/myphotoqr_site')
 base_phrases = [
 "qr album", "photo qr album", "event photo sharing", "wedding qr album", "party photo album qr", "qr photo upload", "guest photo upload", "no app photo sharing", "instant photo sharing", "event gallery", "live event gallery", "live slideshow", "wedding photo sharing app", "qr code photo album", "event memories", "photo booth alternative", "collect guest photos", "upload wedding photos qr", "birthday qr album", "graduation qr album", "corporate event album", "quinceanera qr album", "baby shower photo sharing", "bridal shower qr photos", "anniversary photo album", "event photo collection", "shared photo album for event", "qr code for wedding photos", "qr upload link", "browser photo upload", "event video upload", "guest video upload", "download event photos", "zip photo export", "moderated event gallery", "private event album", "photo sharing without app", "digital event album", "scan qr upload photos", "qr gallery", "event qr code", "wedding memories online", "photo album for guests", "event album link", "photo upload page", "instant upload gallery", "qr photo sharing for events", "event media collection", "memories gallery", "event content hub", "wedding gallery live", "qr album for wedding", "guest upload website", "no login photo upload", "mobile photo sharing", "android iphone event album", "web based photo album", "event photo wall", "realtime photo wall", "event slideshow screen", "wedding slideshow live", "scan to upload photos", "scan to share photos", "share event photos qr", "photo drop for events", "qr memory album", "digital guestbook photos", "event notes audio photos", "event audio notes", "guest notes album", "event keepsake album", "online wedding album", "one time payment photo album", "affordable event photo sharing", "secure photo sharing event", "private qr album", "album protected by code", "photo moderation event", "approve guest photos", "hide guest uploads", "featured event photos", "event gallery admin", "album dashboard", "custom event album", "branded event gallery", "custom qr album", "event album themes", "event album cover", "album banner", "photo sharing link", "upload photos from phone", "event uploads from browser", "qr code wedding sign", "table qr photo upload", "event signs qr code", "wedding table qr code", "photo collection for wedding planner", "event planner photo sharing", "venue photo sharing tool", "corporate event memories", "conference photo album", "festival photo sharing", "concert photo sharing", "school event album", "sports event photo album", "family reunion qr album", "travel group photo album", "engagement party qr album", "bachelorette photo sharing", "bachelor party photo album", "holiday party photo sharing", "memorial event photo album", "fundraiser photo sharing", "church event photo album", "community event photo album", "reunion photo upload qr", "event photo archive", "digital memories event", "upload videos by qr", "photo video gallery", "share photos videos instantly", "event upload portal", "online gallery for guests", "guest media upload", "collect videos from guests", "all guest photos in one place", "replace whatsapp photo sharing", "avoid lost event photos", "wedding photo collection link", "qr code gallery app", "photo album qr code generator", "event album qr generator", "qr code upload system", "easy qr album", "create qr album", "make qr album", "fast event album setup", "instant qr album setup", "qr album one event", "photo sharing for one event", "download all photos after event", "photo album with qr code", "qr photo gallery for events", "online gallery no app", "real time photo upload event", "event media gallery", "collect memories with qr", "share memories with qr", "guest generated event content", "ugc event gallery", "event user generated content", "photo sharing software", "event SaaS photo sharing", "event memory platform", "qr memories platform", "live gallery software", "digital event guestbook", "wedding guest photo collection", "birthday guest photo upload", "graduation guest photo upload", "qr code photo wall", "photo wall for events", "slideshow with guest photos", "tv slideshow event photos", "projector slideshow wedding", "private event photo website", "secure wedding photo upload", "photo album with access code", "guest photo approval", "curated event album", "moderation dashboard photos", "event organizer photo control", "view and upload link", "upload only link", "admin link album", "qr album admin panel", "smart event photo album", "simple event photo album", "minimal event photo sharing", "clean event gallery", "modern qr album", "myphotoqr", "my photo qr", "MyPhotoQR event album"
 ]
-modifiers = ["best", "easy", "fast", "simple", "secure", "private", "live", "online", "mobile", "instant", "modern", "affordable", "professional", "custom", "browser based", "no app", "real time", "shareable", "downloadable", "moderated"]
-contexts = ["weddings", "events", "birthdays", "graduations", "corporate events", "parties", "quinceaneras", "baby showers", "bridal showers", "anniversaries", "conferences", "reunions", "festivals", "school events", "family events", "venues", "event planners", "guests", "hosts", "organizers"]
-keywords=[]
-for p in base_phrases:
-    keywords.append(p)
-for m in modifiers:
-    for p in base_phrases[:120]:
-        keywords.append(f"{m} {p}")
-for p in base_phrases[:80]:
-    for c in contexts:
-        keywords.append(f"{p} for {c}")
-# ensure >2000 phrases and many words
-keywords = list(dict.fromkeys(keywords))
-keywords_meta = ", ".join(keywords)
+# SEO note: search engines ignore the meta keywords tag; very large keyword lists are a spam signal.
+# Keep keywords short and page-specific.
+default_keywords_meta = ", ".join(base_phrases[:20])
 
 nav = '''
 <header class="site-header">
-  <a class="brand" href="index.html" aria-label="MyPhotoQR home">
-    <img src="img/logo-myphotoqr.jpg" alt="MyPhotoQR logo" class="brand-logo">
+  <a class="brand" href="/" aria-label="MyPhotoQR home">
+    <img src="img/logo-myphotoqr.png" alt="MyPhotoQR logo" class="brand-logo">
     <span>MyPhotoQR</span>
   </a>
   <button class="menu-toggle" aria-label="Open menu" data-menu-toggle>☰</button>
   <nav class="nav" data-nav>
-    <a href="index.html">Home</a>
+    <a href="/">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="features.html">Features</a>
     <a href="pricing.html">Pricing</a>
@@ -42,7 +32,7 @@ nav = '''
 footer = '''
 <footer class="footer">
   <div>
-    <a class="brand footer-brand" href="index.html"><img src="img/logo-myphotoqr.jpg" alt="MyPhotoQR logo" class="brand-logo"><span>MyPhotoQR</span></a>
+    <a class="brand footer-brand" href="/"><img src="img/logo-myphotoqr.png" alt="MyPhotoQR logo" class="brand-logo"><span>MyPhotoQR</span></a>
     <p>QR albums for weddings, birthdays, graduations, corporate events and every celebration worth remembering.</p>
   </div>
   <div class="footer-links">
@@ -54,7 +44,7 @@ footer = '''
   <p class="copyright">© 2026 MyPhotoQR. All rights reserved. Support: support@myphotoqr.com</p>
 </footer>'''
 
-def head(title, desc, canonical, extra=''):
+def head(title, desc, canonical, extra='', keywords_meta=default_keywords_meta):
     return f'''<!doctype html>
 <html lang="en">
 <head>
@@ -80,11 +70,11 @@ def head(title, desc, canonical, extra=''):
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MyPhotoQR","applicationCategory":"MultimediaApplication","operatingSystem":"Web","offers":{{"@type":"Offer","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}},"description":"A no-app QR album for event photo and video sharing.","url":"https://www.myphotoqr.com"}}</script>
+  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MyPhotoQR","applicationCategory":"MultimediaApplication","operatingSystem":"Web","offers":{{"@type":"Offer","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}},"description":"A no-app QR album for event photo and video sharing.","url":"https://www.myphotoqr.com/"}}</script>
   {extra}
 </head>'''
 
-home = head('MyPhotoQR | QR Album for Event Photo Sharing, No App Needed', 'Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.', 'index.html') + f'''
+home = head('MyPhotoQR | QR Album for Event Photo Sharing, No App Needed', 'Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.', '') + f'''
 <body>{nav}
 <main>
 <section class="hero section-pad">
