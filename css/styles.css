@@ -20,6 +20,6 @@
 .usecase-step p{margin:0}
 @media(max-width:900px){.usecase-step{grid-template-columns:1fr}.usecase-step img{width:100%;height:auto}}
 
-/* Mobile-safe centering: prevent hero text from touching edges */
-.hero-copy{padding-inline:14px}
-@media(max-width:900px){.hero-copy{padding-inline:20px}.hero h1{letter-spacing:-.06em;padding-inline:2px}}
+/* Mobile-safe centering: keep equal left/right gutters in the hero */
+.hero-copy{width:min(820px,calc(100% - 28px));margin-inline:auto;padding:0}
+@media(max-width:900px){.hero-copy{width:calc(100% - 40px)}.hero h1{letter-spacing:-.06em}}
