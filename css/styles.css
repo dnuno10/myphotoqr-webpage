@@ -23,3 +23,8 @@
 /* Mobile-safe centering: keep equal left/right gutters in the hero */
 .hero-copy{width:100%;max-width:820px;margin-inline:auto;padding-inline:28px}
 @media(max-width:900px){.hero-copy{padding-inline:20px}.hero h1{letter-spacing:-.06em;text-wrap:balance}.hero p{text-wrap:pretty}}
+
+/* Index hero: center every line block and remove any drift */
+.hero-copy{display:flex;flex-direction:column;align-items:center}
+.hero-copy>*{max-width:100%;width:100%}
+.hero-copy .eyebrow,.hero-copy h1,.hero-copy p{margin-left:auto;margin-right:auto}
