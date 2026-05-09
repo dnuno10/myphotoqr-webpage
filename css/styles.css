@@ -28,3 +28,4 @@
 .hero-copy{display:flex;flex-direction:column;align-items:center}
 .hero-copy>*{max-width:100%;width:100%}
 .hero-copy .eyebrow,.hero-copy h1,.hero-copy p{margin-left:auto;margin-right:auto}
+.hero-copy h1{padding-inline:0}
