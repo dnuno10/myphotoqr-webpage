@@ -1,22 +1,399 @@
+from datetime import date
+from html import escape
+import json
 from pathlib import Path
 
-# Generate into the repository root (same folder as this script).
-root = Path(__file__).resolve().parent
-(root/'css').mkdir(exist_ok=True)
-(root/'js').mkdir(exist_ok=True)
-(root/'img').mkdir(exist_ok=True)
+ROOT = Path(__file__).resolve().parent
+SITE_URL = "https://www.myphotoqr.com"
+TODAY = date.today().isoformat()
 
-base_phrases = [
-"qr album", "photo qr album", "event photo sharing", "wedding qr album", "party photo album qr", "qr photo upload", "guest photo upload", "no app photo sharing", "instant photo sharing", "event gallery", "live event gallery", "live slideshow", "wedding photo sharing app", "qr code photo album", "event memories", "photo booth alternative", "collect guest photos", "upload wedding photos qr", "birthday qr album", "graduation qr album", "corporate event album", "quinceanera qr album", "baby shower photo sharing", "bridal shower qr photos", "anniversary photo album", "event photo collection", "shared photo album for event", "qr code for wedding photos", "qr upload link", "browser photo upload", "event video upload", "guest video upload", "download event photos", "zip photo export", "moderated event gallery", "private event album", "photo sharing without app", "digital event album", "scan qr upload photos", "qr gallery", "event qr code", "wedding memories online", "photo album for guests", "event album link", "photo upload page", "instant upload gallery", "qr photo sharing for events", "event media collection", "memories gallery", "event content hub", "wedding gallery live", "qr album for wedding", "guest upload website", "no login photo upload", "mobile photo sharing", "android iphone event album", "web based photo album", "event photo wall", "realtime photo wall", "event slideshow screen", "wedding slideshow live", "scan to upload photos", "scan to share photos", "share event photos qr", "photo drop for events", "qr memory album", "digital guestbook photos", "event notes audio photos", "event audio notes", "guest notes album", "event keepsake album", "online wedding album", "one time payment photo album", "affordable event photo sharing", "secure photo sharing event", "private qr album", "album protected by code", "photo moderation event", "approve guest photos", "hide guest uploads", "featured event photos", "event gallery admin", "album dashboard", "custom event album", "branded event gallery", "custom qr album", "event album themes", "event album cover", "album banner", "photo sharing link", "upload photos from phone", "event uploads from browser", "qr code wedding sign", "table qr photo upload", "event signs qr code", "wedding table qr code", "photo collection for wedding planner", "event planner photo sharing", "venue photo sharing tool", "corporate event memories", "conference photo album", "festival photo sharing", "concert photo sharing", "school event album", "sports event photo album", "family reunion qr album", "travel group photo album", "engagement party qr album", "bachelorette photo sharing", "bachelor party photo album", "holiday party photo sharing", "memorial event photo album", "fundraiser photo sharing", "church event photo album", "community event photo album", "reunion photo upload qr", "event photo archive", "digital memories event", "upload videos by qr", "photo video gallery", "share photos videos instantly", "event upload portal", "online gallery for guests", "guest media upload", "collect videos from guests", "all guest photos in one place", "replace whatsapp photo sharing", "avoid lost event photos", "wedding photo collection link", "qr code gallery app", "photo album qr code generator", "event album qr generator", "qr code upload system", "easy qr album", "create qr album", "make qr album", "fast event album setup", "instant qr album setup", "qr album one event", "photo sharing for one event", "download all photos after event", "photo album with qr code", "qr photo gallery for events", "online gallery no app", "real time photo upload event", "event media gallery", "collect memories with qr", "share memories with qr", "guest generated event content", "ugc event gallery", "event user generated content", "photo sharing software", "event SaaS photo sharing", "event memory platform", "qr memories platform", "live gallery software", "digital event guestbook", "wedding guest photo collection", "birthday guest photo upload", "graduation guest photo upload", "qr code photo wall", "photo wall for events", "slideshow with guest photos", "tv slideshow event photos", "projector slideshow wedding", "private event photo website", "secure wedding photo upload", "photo album with access code", "guest photo approval", "curated event album", "moderation dashboard photos", "event organizer photo control", "view and upload link", "upload only link", "admin link album", "qr album admin panel", "smart event photo album", "simple event photo album", "minimal event photo sharing", "clean event gallery", "modern qr album", "myphotoqr", "my photo qr", "MyPhotoQR event album"
+
+EVENTS = [
+    {
+        "slug": "weddings",
+        "label": "Weddings",
+        "event_name": "wedding",
+        "hero_title": "Wedding photo sharing with one QR album",
+        "description": "Collect wedding photos and videos in one private QR album. Guests scan a QR code, upload from their browser, and you get a live gallery, moderation controls, and a final ZIP export.",
+        "hero_copy": "Capture ceremony, cocktail hour, and dance-floor moments without chasing guests later. One QR code gives everyone an easy way to share from any phone.",
+        "image": "img/wedding-slideshow.jpg",
+        "eyebrow": "Ceremony, reception and candid moments in one place",
+        "placements": "Welcome sign, reception tables, photo booth backdrop, DJ screen and post-event thank-you message.",
+    },
+    {
+        "slug": "birthdays",
+        "label": "Birthdays",
+        "event_name": "birthday party",
+        "hero_title": "Birthday photo sharing with one QR album",
+        "description": "Collect birthday party photos and videos in one private QR album. Guests scan a QR code, upload from their browser, and you keep everything organized in one gallery.",
+        "hero_copy": "From candles to cake, every guest can add photos instantly. MyPhotoQR replaces scattered chats with one clean album and a simple QR flow.",
+        "image": "img/feature-slideshow.jpg",
+        "eyebrow": "Candids, cake, family photos and party videos",
+        "placements": "Gift table, welcome sign, photo wall, kids table and follow-up text after the party.",
+    },
+    {
+        "slug": "graduations",
+        "label": "Graduations",
+        "event_name": "graduation party",
+        "hero_title": "Graduation photo sharing with one QR album",
+        "description": "Collect graduation party photos and videos with a QR code guests can scan from any phone. Build one live album, protect it with optional moderation, and export the full archive later.",
+        "hero_copy": "Collect cap toss photos, family snapshots and celebration videos in one place without asking guests to install an app.",
+        "image": "img/grad-slideshow.jpg",
+        "eyebrow": "Cap toss, family portraits and celebration uploads",
+        "placements": "Entrance board, party tables, graduation announcements, family group chat and slideshow screen.",
+    },
+    {
+        "slug": "anniversaries",
+        "label": "Anniversaries",
+        "event_name": "anniversary celebration",
+        "hero_title": "Anniversary photo sharing with one QR album",
+        "description": "Collect anniversary celebration photos and videos in one QR album guests can use without an app. Keep memories private, feature the best uploads, and download everything afterward.",
+        "hero_copy": "Make it easy for family and friends to share toasts, throwback photos and new memories with one QR code and one private event gallery.",
+        "image": "img/anniversarie-slideshow.jpg",
+        "eyebrow": "One private album for family memories and tributes",
+        "placements": "Memory table, dinner menus, anniversary slideshow and family WhatsApp message.",
+    },
+    {
+        "slug": "corporate-events",
+        "label": "Corporate Events",
+        "event_name": "corporate event",
+        "hero_title": "Corporate event photo sharing with one QR album",
+        "description": "Collect conference, retreat and activation photos in one branded QR album. Attendees upload from their browser while your team reviews, features and exports the best content.",
+        "hero_copy": "Use one clean upload flow for staff, guests and attendees. Gather event media, social-ready moments and behind-the-scenes content in real time.",
+        "image": "img/corporate-slideshow.jpg",
+        "eyebrow": "Activations, conferences, retreats and team events",
+        "placements": "Registration desk, agenda slides, booth signage, recap email and team Slack post.",
+    },
+    {
+        "slug": "baby-showers",
+        "label": "Baby Showers",
+        "event_name": "baby shower",
+        "hero_title": "Baby shower photo sharing with one QR album",
+        "description": "Collect baby shower photos, videos and sweet messages in one private QR album. Guests upload from any browser and you keep everything organized for later.",
+        "hero_copy": "Share one QR code and collect gift-table photos, family moments and messages without losing anything in text threads.",
+        "image": "img/babyshower-slideshow.jpg",
+        "eyebrow": "A keepsake album for photos, videos and notes",
+        "placements": "Gift table, dessert station, welcome sign, favor tags and thank-you follow-up.",
+    },
+    {
+        "slug": "quinceaneras",
+        "label": "Quinceañeras",
+        "event_name": "quinceañera",
+        "hero_title": "Quinceañera photo sharing with one QR album",
+        "description": "Collect quinceañera photos and videos in one private QR album. Guests scan a QR code, upload instantly, and you can show a live slideshow and export the full gallery after the event.",
+        "hero_copy": "Capture dance-floor moments, family portraits and guest videos with one shareable QR code that works on any device.",
+        "image": "img/15-slideshow.jpg",
+        "eyebrow": "Dance floor, portraits and celebration highlights",
+        "placements": "Entrance display, centerpieces, DJ screen, printed programs and family social posts.",
+    },
+    {
+        "slug": "religious-events",
+        "label": "Religious Events",
+        "event_name": "religious event",
+        "hero_title": "Religious event photo sharing with one QR album",
+        "description": "Collect church and family celebration photos in one private QR album guests can access without an app. Keep the gallery simple, respectful and easy to share later.",
+        "hero_copy": "For baptisms, confirmations, first communions and community celebrations, MyPhotoQR keeps every guest upload in one secure place.",
+        "image": "img/religious-slideshow.jpg",
+        "eyebrow": "Baptisms, confirmations, communions and community events",
+        "placements": "Reception hall sign, printed programs, family table, church bulletin insert and post-event message.",
+    },
+    {
+        "slug": "farewell-parties",
+        "label": "Farewell Parties",
+        "event_name": "farewell party",
+        "hero_title": "Farewell party photo sharing with one QR album",
+        "description": "Collect farewell party photos, videos and messages in one QR album guests can use from any phone browser. Keep every memory together and export the full archive later.",
+        "hero_copy": "Make it easy for everyone to share group photos, speeches and candid goodbye moments in one place before the night ends.",
+        "image": "img/farewerll-slideshow.jpg",
+        "eyebrow": "Photos, speeches and goodbye messages in one album",
+        "placements": "Entrance sign, memory wall, group dinner tables, projector screen and post-party message.",
+    },
+    {
+        "slug": "group-trips",
+        "label": "Group Trips",
+        "event_name": "group trip",
+        "hero_title": "Group trip photo sharing with one QR album",
+        "description": "Collect group trip photos and videos in one QR album everyone can use without an app. Build a live shared gallery and download the full archive after the trip.",
+        "hero_copy": "From airports to excursions, MyPhotoQR keeps everyone’s travel photos in one place instead of spread across dozens of chats.",
+        "image": "img/trip-slideshow.jpg",
+        "eyebrow": "Travel photos and videos collected in one shared album",
+        "placements": "Trip itinerary, welcome packet, tour bus screen, accommodation message and recap email.",
+    },
 ]
-# SEO note: search engines ignore the meta keywords tag; very large keyword lists are a spam signal.
-# Keep keywords short and page-specific.
-default_keywords_meta = ", ".join(base_phrases[:20])
 
-nav = '''
+EVENT_LOOKUP = {event["slug"]: event for event in EVENTS}
+
+FAQ_HOME = [
+    (
+        "What is a QR photo album?",
+        "A QR photo album is a private event page where guests scan a QR code and upload photos or videos directly from their browser. It removes the need for apps, accounts or long upload instructions.",
+    ),
+    (
+        "Do guests need to download an app?",
+        "No. MyPhotoQR works in the browser on iPhone, Android, tablets and desktop. Guests scan, tap upload and share instantly.",
+    ),
+    (
+        "Can I moderate uploads before they appear?",
+        "Yes. You can enable moderation, keep content pending, auto-approve uploads, hide items or feature the best moments for your gallery and slideshow.",
+    ),
+    (
+        "Can I download all photos after the event?",
+        "Yes. You can export the album as a ZIP file to save every photo and video after the event.",
+    ),
+]
+
+FAQ_HOW = [
+    (
+        "How long does setup take?",
+        "Most hosts can create the album, personalize it and share the QR code in just a few minutes.",
+    ),
+    (
+        "Where should I place the QR code?",
+        "Use tables, welcome signs, invitations, slides, DJ screens, booths and follow-up messages so guests always have a visible way to upload.",
+    ),
+    (
+        "Can I use the same album on phones and desktop?",
+        "Yes. Album links open in mobile and desktop browsers, which makes testing and admin review simple before and during the event.",
+    ),
+    (
+        "Can guests upload both photos and videos?",
+        "Yes. Depending on your album settings, you can allow photos, videos, notes and audio memories.",
+    ),
+]
+
+FAQ_FEATURES = [
+    (
+        "What makes MyPhotoQR better than sharing photos in group chats?",
+        "Everything stays in one gallery with one link, instead of being buried across messages, apps and duplicate uploads.",
+    ),
+    (
+        "Can I brand the album to match my event?",
+        "Yes. You can customize the album name, description, event type, cover image, banner and theme colors.",
+    ),
+    (
+        "Does MyPhotoQR support live slideshows?",
+        "Yes. You can show approved uploads on a TV or projector during the event using the live gallery and slideshow view.",
+    ),
+]
+
+FAQ_PRICING = [
+    (
+        "Is MyPhotoQR a subscription?",
+        "No. The main plan is a one-time payment for one event album.",
+    ),
+    (
+        "How long does the album stay active?",
+        "The album and storage remain active for one year from the date the album is created.",
+    ),
+    (
+        "What is included in the one-time payment?",
+        "The plan includes one event album, QR sharing, guest uploads, live gallery, moderation options, slideshow support and ZIP export.",
+    ),
+    (
+        "Can I buy the album before my event date?",
+        "Yes. Many customers create and test the album in advance so the QR code is ready before guests arrive.",
+    ),
+]
+
+FAQ_SUPPORT = [
+    (
+        "How can I contact support?",
+        "You can email support@myphotoqr.com for help with album setup, QR sharing, slideshow testing and export questions.",
+    ),
+    (
+        "What should I test before the event?",
+        "Test the QR code on a phone, verify upload settings, review moderation options and confirm the slideshow works on the screen you plan to use.",
+    ),
+    (
+        "What if guests have slow internet?",
+        "Guests can retry when the connection improves. For the best experience, place the QR where mobile data or Wi-Fi signal is strong.",
+    ),
+]
+
+
+def img(src: str, alt: str, css_class: str = "", eager: bool = False) -> str:
+    attrs = [
+        f'src="{escape(src)}"',
+        f'alt="{escape(alt)}"',
+        'decoding="async"',
+    ]
+    if eager:
+        attrs.append('loading="eager"')
+        attrs.append('fetchpriority="high"')
+    else:
+        attrs.append('loading="lazy"')
+    if css_class:
+        attrs.append(f'class="{escape(css_class)}"')
+    return f"<img {' '.join(attrs)}>"
+
+
+def absolute(path: str) -> str:
+    return f"{SITE_URL}/{path}" if path else f"{SITE_URL}/"
+
+
+def breadcrumb_schema(trail):
+    return {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": index,
+                "name": label,
+                "item": url,
+            }
+            for index, (label, url) in enumerate(trail, start=1)
+        ],
+    }
+
+
+def faq_schema(items):
+    return {
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": question,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": answer,
+                },
+            }
+            for question, answer in items
+        ],
+    }
+
+
+def site_schema():
+    return [
+        {
+            "@type": "WebSite",
+            "@id": f"{SITE_URL}/#website",
+            "name": "MyPhotoQR",
+            "url": f"{SITE_URL}/",
+        },
+        {
+            "@type": "Organization",
+            "@id": f"{SITE_URL}/#organization",
+            "name": "MyPhotoQR",
+            "url": f"{SITE_URL}/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": absolute("img/logo-myphotoqr.png"),
+            },
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "customer support",
+                "email": "support@myphotoqr.com",
+                "availableLanguage": ["English"],
+            },
+        },
+        {
+            "@type": "SoftwareApplication",
+            "@id": f"{SITE_URL}/#app",
+            "name": "MyPhotoQR",
+            "applicationCategory": "MultimediaApplication",
+            "operatingSystem": "Web",
+            "offers": {
+                "@type": "Offer",
+                "price": "19.99",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": "https://app.myphotoqr.com/create",
+            },
+            "description": "A no-app QR album for event photo and video sharing.",
+            "url": f"{SITE_URL}/",
+        },
+    ]
+
+
+def webpage_schema(title: str, description: str, canonical: str, image_path: str, about: list[str]):
+    return {
+        "@type": "WebPage",
+        "@id": f"{absolute(canonical)}#webpage",
+        "url": absolute(canonical),
+        "name": title,
+        "description": description,
+        "isPartOf": {"@id": f"{SITE_URL}/#website"},
+        "about": [{"@type": "Thing", "name": item} for item in about],
+        "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": absolute(image_path),
+        },
+    }
+
+
+def render_faq(items, title):
+    blocks = []
+    for question, answer in items:
+        blocks.append(
+            f"<details><summary>{escape(question)}</summary><p>{escape(answer)}</p></details>"
+        )
+    return f"""
+<section class="faq section-pad" id="faq">
+  <h2>{escape(title)}</h2>
+  {''.join(blocks)}
+</section>
+"""
+
+
+def render_breadcrumbs(items):
+    links = []
+    for index, (label, href) in enumerate(items):
+        if index == len(items) - 1:
+            links.append(f'<span aria-current="page">{escape(label)}</span>')
+        else:
+            links.append(f'<a href="{escape(href)}">{escape(label)}</a>')
+    return f"""
+<nav class="breadcrumbs section-pad" aria-label="Breadcrumb">
+  {'<span class="breadcrumbs-sep">/</span>'.join(links)}
+</nav>
+"""
+
+
+def head(title: str, description: str, canonical: str, image_path: str, schema_nodes: list[dict]) -> str:
+    graph = {"@context": "https://schema.org", "@graph": site_schema() + schema_nodes}
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{escape(title)}</title>
+  <meta name="description" content="{escape(description)}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="MyPhotoQR">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="{escape(absolute(canonical))}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="MyPhotoQR">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{escape(title)}">
+  <meta property="og:description" content="{escape(description)}">
+  <meta property="og:url" content="{escape(absolute(canonical))}">
+  <meta property="og:image" content="{escape(absolute(image_path))}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{escape(title)}">
+  <meta name="twitter:description" content="{escape(description)}">
+  <meta name="twitter:image" content="{escape(absolute(image_path))}">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">{json.dumps(graph, ensure_ascii=False)}</script>
+</head>"""
+
+
+def nav():
+    event_links = "".join(
+        f'<a role="menuitem" href="{event["slug"]}.html">{event["label"]}</a>' for event in EVENTS
+    )
+    return f"""
 <header class="site-header">
   <a class="brand" href="/" aria-label="MyPhotoQR home">
-    <img src="img/logo-myphotoqr.png" alt="MyPhotoQR logo" class="brand-logo">
+    {img("img/logo-myphotoqr.png", "MyPhotoQR logo", "brand-logo", eager=True)}
     <span>MyPhotoQR</span>
   </a>
   <button class="menu-toggle" aria-label="Open menu" data-menu-toggle>☰</button>
@@ -24,199 +401,736 @@ nav = '''
     <a href="/">Home</a>
     <a href="how-it-works.html">How it works</a>
     <a href="features.html">Features</a>
+    <a href="events.html">Events</a>
+    <div class="nav-dropdown" data-dropdown>
+      <button class="nav-dropdown-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="events-menu">
+        Event Types <span aria-hidden="true">▾</span>
+      </button>
+      <div class="nav-dropdown-menu" id="events-menu" role="menu">
+        {event_links}
+      </div>
+    </div>
     <a href="pricing.html">Pricing</a>
     <a href="support.html">Support</a>
   </nav>
-  <a class="nav-cta" href="https://app.myphotoqr.com/create">Buy album</a>
-</header>'''
-footer = '''
+  <a class="nav-cta" href="https://app.myphotoqr.com/create">Create album</a>
+</header>
+"""
+
+
+def footer():
+    event_links = "".join(f'<a href="{event["slug"]}.html">{event["label"]}</a>' for event in EVENTS)
+    return f"""
 <footer class="footer">
   <div>
-    <a class="brand footer-brand" href="/"><img src="img/logo-myphotoqr.png" alt="MyPhotoQR logo" class="brand-logo"><span>MyPhotoQR</span></a>
-    <p>QR albums for weddings, birthdays, graduations, corporate events and every celebration worth remembering.</p>
+    <a class="brand footer-brand" href="/" aria-label="MyPhotoQR home">
+      {img("img/logo-myphotoqr.png", "MyPhotoQR logo", "brand-logo")}
+      <span>MyPhotoQR</span>
+    </a>
+    <p>MyPhotoQR is a no-app QR album for weddings, birthdays, graduations, corporate events and every celebration worth keeping.</p>
   </div>
   <div class="footer-links">
+    <a href="events.html">All event pages</a>
+    <a href="features.html">Features</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="support.html">Support</a>
     <a href="privacy.html">Privacy</a>
     <a href="terms.html">Terms</a>
     <a href="refunds.html">Refunds</a>
-    <a href="support.html">Contact</a>
+  </div>
+  <div class="footer-links footer-events">
+    {event_links}
   </div>
   <p class="copyright">© 2026 MyPhotoQR. All rights reserved. Support: support@myphotoqr.com</p>
-</footer>'''
+</footer>
+"""
 
-def head(title, desc, canonical, extra='', keywords_meta=default_keywords_meta):
-    return f'''<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{title}</title>
-  <meta name="description" content="{desc}">
-  <meta name="keywords" content="{keywords_meta}">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="author" content="MyPhotoQR">
-  <link rel="canonical" href="https://www.myphotoqr.com/{canonical}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{title}">
-  <meta property="og:description" content="{desc}">
-  <meta property="og:url" content="https://www.myphotoqr.com/{canonical}">
-  <meta property="og:image" content="https://www.myphotoqr.com/img/og-myphotoqr.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{title}">
-  <meta name="twitter:description" content="{desc}">
-  <meta name="twitter:image" content="https://www.myphotoqr.com/img/og-myphotoqr.jpg">
-  <link rel="icon" href="img/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <script type="application/ld+json">{{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MyPhotoQR","applicationCategory":"MultimediaApplication","operatingSystem":"Web","offers":{{"@type":"Offer","price":"19.99","priceCurrency":"USD","availability":"https://schema.org/InStock"}},"description":"A no-app QR album for event photo and video sharing.","url":"https://www.myphotoqr.com/"}}</script>
-  {extra}
-</head>'''
 
-home = head('MyPhotoQR | QR Album for Event Photo Sharing, No App Needed', 'Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.', '') + f'''
-<body>{nav}
-<main>
+def page(title, description, canonical, image_path, body, schema_nodes, body_class=""):
+    return (
+        head(title, description, canonical, image_path, schema_nodes)
+        + f"""
+<body{f' class="{body_class}"' if body_class else ''}>
+{nav()}
+<main>{body}</main>
+{footer()}
+<script src="js/main.js"></script>
+</body>
+</html>
+"""
+    )
+
+
+def event_cards():
+    cards = []
+    for event in EVENTS:
+        cards.append(
+            f"""
+<article>
+  <h3><a href="{event["slug"]}.html">{event["label"]}</a></h3>
+  <p>{escape(event["description"])}</p>
+  <a class="text-link" href="{event["slug"]}.html">See {event["label"].lower()} page</a>
+</article>
+"""
+        )
+    return "".join(cards)
+
+
+home_body = f"""
 <section class="hero section-pad">
-  <div class="floating-badge badge-left"><img src="img/icon-gallery.png" alt="Live gallery icon"><span>Live gallery</span></div>
-  <div class="floating-badge badge-right"><img src="img/icon-qr.png" alt="QR sharing icon"><span>QR ready</span></div>
+  {img("img/feature-slideshow.jpg", "Live event gallery preview", "hero-float-media hero-float-left")}
+  {img("img/scanning.jpg", "Guest scanning a QR code to upload event photos", "hero-float-media hero-float-right")}
   <div class="hero-copy">
-    <p class="eyebrow">No app needed · Made for real events</p>
-    <h1>Your QR Album — instant photo and video sharing for any event</h1>
-    <p>Guests scan your QR code, upload from their phone, and every memory lands in one clean online album. You stay in control with privacy, moderation, live slideshow, and final export.</p>
-    <div class="hero-actions"><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a><a class="btn secondary" href="features.html">View features</a></div>
-    <p class="microcopy">Works on iPhone, Android, tablets and desktop browsers. Setup takes minutes.</p>
+    <p class="eyebrow">No app needed · Built for real events</p>
+    <h1>Collect Every Guest Photo in One QR Album</h1>
+    <p>Guests scan your QR code and instantly upload photos and videos to one shared album. You keep everything organized in one gallery with privacy controls, moderation and ZIP export.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="https://app.myphotoqr.com/create">Create your album</a>
+      <a class="btn secondary" href="how-it-works.html">See how it works</a>
+    </div>
+    <p class="microcopy">Works on iPhone, Android, tablets and desktop. Setup takes minutes.</p>
   </div>
   <div class="hero-visual">
-    <img src="img/home-phone-mockup.jpg" alt="MyPhotoQR guest upload and live gallery phone mockup">
+    {img("img/home-phone-mockup.jpg", "MyPhotoQR upload flow and live gallery preview on a phone", eager=True)}
   </div>
 </section>
+
 <section class="section-pad compact center">
-  <h2>Everything guests share, organized in one private event album</h2>
-  <p class="section-lead">Stop chasing photos through group chats. MyPhotoQR gives every guest one simple place to upload photos, videos, notes and audio memories.</p>
+  <h2>Why event hosts use a QR photo album</h2>
+  <p class="section-lead">MyPhotoQR replaces scattered chats, air drops and missing media with one simple upload page guests can open from any browser.</p>
   <div class="benefit-grid">
-    <article><img src="img/icon-qr.png" alt="QR icon"><h3>QR ready to print</h3><p>Place the QR on tables, invitations, signs, screens or messages.</p></article>
-    <article><img src="img/icon-upload.png" alt="Upload icon"><h3>Browser uploads</h3><p>Guests upload directly from their phones without downloading an app.</p></article>
-    <article><img src="img/icon-slideshow.png" alt="Slideshow icon"><h3>Live slideshow</h3><p>Show approved memories on a TV or projector while the event is happening.</p></article>
-    <article><img src="img/icon-download.png" alt="Download icon"><h3>Final ZIP export</h3><p>Download photos and videos after the event to keep them forever.</p></article>
+    <article><h3>One upload link for everyone</h3><p>Guests scan one QR code and upload without downloading an app or creating an account.</p></article>
+    <article><h3>Private event gallery</h3><p>Keep event memories in one branded album instead of spread across messages and social apps.</p></article>
+    <article><h3>Live slideshow and moderation</h3><p>Feature the best uploads live on a TV or projector while staying in control of what appears.</p></article>
+    <article><h3>Final ZIP export</h3><p>Download the full archive after the event so every photo and video stays with you.</p></article>
   </div>
 </section>
+
 <section class="split section-pad alt">
-  <div class="center"><p class="eyebrow">Built for every celebration</p><h2>One QR code for weddings, birthdays, graduations, parties and corporate events</h2><p>Whether your guests are at the table, on the dance floor, at a booth, or across the venue, they can upload memories in real time. Your album keeps everything structured and easy to review.</p><a class="text-link" href="how-it-works.html">See how it works →</a></div>
-  <div class="image-board"><img src="img/event-collage.jpg" alt="Event collage with QR album examples"><img src="img/feature-slideshow.jpg" alt="Live gallery slideshow"></div>
+  <div>
+    <p class="eyebrow">What it solves</p>
+    <h2>Stop losing event photos in group chats</h2>
+    <p>Traditional event sharing breaks because guests use different apps, formats and chats. MyPhotoQR gives every attendee one clean place to upload from their phone while the event is happening.</p>
+    <ul class="check-list compact-list">
+      <li>No app install friction</li>
+      <li>No searching across multiple chats</li>
+      <li>No missing guest photos after the event</li>
+      <li>No messy manual collection process</li>
+    </ul>
+  </div>
+  <div class="image-board">
+    {img("img/event-collage.jpg", "Collage of MyPhotoQR event album use cases")}
+    {img("img/feature-upload.jpg", "Guest photo upload screen in the browser")}
+  </div>
 </section>
+
+<section class="section-pad center" id="events">
+  <p class="eyebrow">Event pages</p>
+  <h2>SEO landing pages for every type of event</h2>
+  <p class="section-lead">Use a dedicated page for your event type to understand the best QR album setup, the most effective placement ideas and the features that matter most.</p>
+  <div class="benefit-grid link-grid">
+    {event_cards()}
+  </div>
+</section>
+
 <section class="flowbar section-pad">
   <div class="flowbar-track" aria-hidden="true"></div>
   <div class="flowbar-grid">
-    <article><div class="flowbar-icon"><img src="img/icon-gallery.png" alt="Create a QR album"></div><h3>Create a QR album</h3><p>Set up your album in seconds with a custom design, name and description.</p><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album</a></article>
-    <article><div class="flowbar-icon"><img src="img/icon-qr.png" alt="Share your QR or Link"></div><h3>Share your QR or Link</h3><p>Share your unique QR code or link with anyone so they can access the album and start sharing instantly.</p></article>
-    <article><div class="flowbar-icon"><img src="img/icon-upload.png" alt="Collect Memories"></div><h3>Collect Memories</h3><p>Watch photos, videos and notes appear in real time, all in one place.</p></article>
+    <article><div class="flowbar-icon">{img("img/icon-gallery.png", "Create album icon")}</div><h3>Create your album</h3><p>Name the event, add the cover, tune privacy settings and make the page match your celebration.</p></article>
+    <article><div class="flowbar-icon">{img("img/icon-qr.png", "Share QR code icon")}</div><h3>Share the QR code</h3><p>Print it on signs, tables, invitations, slides or send the link directly before and during the event.</p></article>
+    <article><div class="flowbar-icon">{img("img/icon-upload.png", "Collect uploads icon")}</div><h3>Collect memories live</h3><p>Guests upload from any browser and you can review, feature and export everything after the event.</p></article>
   </div>
 </section>
+
 <section class="section-pad center">
-  <h2>What you get with one event album</h2>
-  <div class="pill-row"><span>1 event album</span><span>QR + share links</span><span>Guest uploads</span><span>Live gallery</span><span>Moderation</span><span>Live slideshow</span><span>ZIP download</span><span>1 year storage</span></div>
+  <h2>What one MyPhotoQR album includes</h2>
+  <div class="pill-row">
+    <span>1 event album</span>
+    <span>QR + link sharing</span>
+    <span>Photo and video uploads</span>
+    <span>Optional moderation</span>
+    <span>Live gallery</span>
+    <span>Slideshow support</span>
+    <span>ZIP export</span>
+    <span>1 year storage</span>
+  </div>
 </section>
-<section class="cta-panel section-pad"><h2>Collect the memories your guests already captured</h2><p>Create one simple QR album and make photo sharing feel effortless from the first scan to the final download.</p><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a></section>
-</main>{footer}<script src="js/main.js"></script></body></html>'''
 
-how = head('How MyPhotoQR Works | Create, Share, Collect and Download Event Photos', 'Learn how to create a QR album, personalize it, share QR links with guests, collect photos and videos in real time, and export your event memories.', 'how-it-works.html') + f'''
-<body>{nav}<main>
-<section class="page-hero section-pad center"><p class="eyebrow">Simple from the first scan</p><h1>How it works?</h1><p>Set up your event album, share the QR code, collect memories live, and download everything when the celebration is over.</p></section>
+{render_faq(FAQ_HOME, "MyPhotoQR QR album FAQ")}
+
+<section class="cta-panel section-pad">
+  <h2>Make photo sharing effortless from the first scan</h2>
+  <p>Create one QR album and give every guest a simple path to upload photos, videos and memories while the event is still happening.</p>
+  <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a>
+</section>
+"""
+
+
+def informational_page(title, description, canonical, image_path, hero_eyebrow, hero_heading, hero_copy, sections, faq_items, about):
+    body = render_breadcrumbs([("Home", "/"), (hero_heading, absolute(canonical))])
+    body += f"""
+<section class="page-hero section-pad center">
+  <p class="eyebrow">{escape(hero_eyebrow)}</p>
+  <h1>{escape(hero_heading)}</h1>
+  <p>{escape(hero_copy)}</p>
+</section>
+"""
+    body += "".join(sections)
+    body += render_faq(faq_items, f"{hero_heading} FAQ")
+    body += """
+<section class="cta-panel section-pad">
+  <h2>Ready to create your album?</h2>
+  <p>Build your event album before guests arrive so the QR code, upload page and slideshow are all ready to go.</p>
+  <a class="btn primary" href="https://app.myphotoqr.com/create">Create album</a>
+</section>
+"""
+    schema = [
+        webpage_schema(title, description, canonical, image_path, about),
+        breadcrumb_schema([("Home", f"{SITE_URL}/"), (hero_heading, absolute(canonical))]),
+        faq_schema(faq_items),
+    ]
+    return page(title, description, canonical, image_path, body, schema)
+
+
+how_sections = [
+    """
 <section class="flowbar section-pad">
   <div class="flowbar-track" aria-hidden="true"></div>
   <div class="flowbar-grid">
-    <article><div class="flowbar-icon"><img src="img/icon-gallery.png" alt="Create a QR album"></div><h3>Create a QR album</h3><p>Set up your album in seconds with a custom design, name and description.</p><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album</a></article>
-    <article><div class="flowbar-icon"><img src="img/icon-qr.png" alt="Share your QR or Link"></div><h3>Share your QR or Link</h3><p>Share your unique QR code or link with anyone so they can access the album and start sharing instantly.</p></article>
-    <article><div class="flowbar-icon"><img src="img/icon-upload.png" alt="Collect Memories"></div><h3>Collect Memories</h3><p>Watch photos, videos and notes appear in real time, all in one place.</p></article>
+    <article><div class="flowbar-icon">"""
+    + img("img/icon-gallery.png", "Create album icon")
+    + """</div><h3>Create</h3><p>Start your album, choose the event type and prepare the page guests will open.</p></article>
+    <article><div class="flowbar-icon">"""
+    + img("img/icon-qr.png", "Share QR icon")
+    + """</div><h3>Share</h3><p>Print the QR or send the link before the event so guests can access the album instantly.</p></article>
+    <article><div class="flowbar-icon">"""
+    + img("img/icon-upload.png", "Upload icon")
+    + """</div><h3>Collect</h3><p>Watch guest uploads arrive live and export everything once the event is over.</p></article>
   </div>
 </section>
+""",
+    """
 <section class="timeline section-pad">
-  <article><div class="step-icon"><img src="img/icon-gallery.png" alt="Create album"></div><h2>Create your QR album</h2><p>Add your event name, type, date, location, short message, cover image and banner. Your album starts with a clean setup made for guests.</p></article>
-  <article><div class="step-icon"><img src="img/icon-slideshow.png" alt="Customize album"></div><h2>Customize the experience</h2><p>Choose colors, background, event label, emoji, privacy settings and upload rules for photos, videos, notes and audio memories.</p></article>
-  <article><div class="step-icon"><img src="img/icon-qr.png" alt="Share QR"></div><h2>Share your QR or link</h2><p>Use your QR on printed signs, table cards, invitations, WhatsApp, Instagram, email or screens. Guests open it in their browser.</p></article>
-  <article><div class="step-icon"><img src="img/icon-upload.png" alt="Receive uploads"></div><h2>Receive memories in real time</h2><p>Guests upload from iPhone, Android, tablet or desktop. Your live gallery updates as content arrives.</p></article>
-  <article><div class="step-icon"><img src="img/icon-gallery.png" alt="Moderation"></div><h2>Approve, hide or feature</h2><p>Turn moderation on, auto-approve uploads, keep items pending, hide content, or highlight your favorite memories.</p></article>
-  <article><div class="step-icon"><img src="img/icon-download.png" alt="Download album"></div><h2>Export the final album</h2><p>Download a ZIP with photos and videos so the event memories can stay on your phone, computer or cloud storage.</p></article>
+  <article><h2>Create the album</h2><p>Add the event name, date, location, message, cover image and theme colors.</p></article>
+  <article><h2>Set privacy rules</h2><p>Enable moderation, access protection and upload preferences before the event starts.</p></article>
+  <article><h2>Place the QR well</h2><p>Use visible signage, printed materials and digital reminders so guests always know where to upload.</p></article>
+  <article><h2>Collect guest media</h2><p>Guests upload photos, videos, audio memories and notes from any compatible browser.</p></article>
+  <article><h2>Feature the best moments</h2><p>Run a live gallery or slideshow using approved uploads for screens, TVs and projectors.</p></article>
+  <article><h2>Export after the event</h2><p>Download a ZIP archive and keep every memory in one organized backup.</p></article>
 </section>
-<section class="split section-pad alt"><div><h2>Designed for a smooth guest experience</h2><p>No app store, no passwords, no complicated instructions. Guests scan, tap upload, choose a file, and send it to your album.</p></div><div class="image-board"><img src="img/feature-upload.jpg" alt="Guest upload screen"></div></section>
-<section class="faq section-pad"><h2>Quick answers</h2>
-  <details><summary>Do guests need to install an app?</summary><p>No. MyPhotoQR works from the browser on mobile, tablet and desktop.</p></details>
-  <details><summary>Can I protect the album with a code?</summary><p>Yes. You can use access protection so only people with the code can view or upload.</p></details>
-  <details><summary>Can I review uploads before they appear?</summary><p>Yes. Use moderation to approve, hide, feature or auto-approve content.</p></details>
-  <details><summary>What happens if internet is slow?</summary><p>Guests can try again when the connection improves. For best results, place the QR near areas with strong mobile data or Wi‑Fi.</p></details>
+""",
+    """
+<section class="split section-pad alt">
+  <div>
+    <p class="eyebrow">Best practices</p>
+    <h2>How to get more guest uploads</h2>
+    <p>Hosts get the best results when the QR code is visible more than once, the upload page is tested before the event and guests are reminded to use it while the energy is high.</p>
+  </div>
+  <div class="support-grid single-grid">
+    <article><h3>Place the QR early</h3><p>Start at the entrance or welcome area so guests see it before they settle in.</p></article>
+    <article><h3>Repeat the placement</h3><p>Use tables, screens and printed signs to keep the upload path visible throughout the event.</p></article>
+    <article><h3>Prompt during key moments</h3><p>Ask the DJ, MC or host to remind guests to upload during speeches, dances or group photos.</p></article>
+  </div>
 </section>
-<section class="cta-panel section-pad"><h2>Have your QR album ready before guests arrive</h2><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album</a></section>
-</main>{footer}<script src="js/main.js"></script></body></html>'''
+""",
+]
 
-features = head('MyPhotoQR Features | QR Event Album, Live Gallery, Moderation and Export', 'Explore MyPhotoQR features: custom QR album, guest photo and video uploads, live slideshow, privacy code, moderation, branding, and ZIP export.', 'features.html') + f'''
-<body>{nav}<main>
-<section class="page-hero section-pad center"><p class="eyebrow">Made for event memories</p><h1>Features that make photo sharing feel effortless</h1><p>Everything you need to collect, organize, moderate, display and keep the best content from your event.</p></section>
+features_sections = [
+    """
 <section class="feature-list section-pad">
-  <article><img src="img/feature-branding.jpg" alt="Album branding settings"><div><h2>Album and branding</h2><p>Make the album feel like your event with a name, description, event type, custom label, date, location, cover image, banner and theme colors.</p></div></article>
-  <article><img src="img/feature-upload.jpg" alt="Guest upload screen"><div><h2>Guest uploads from the browser</h2><p>Allow guests to upload photos, videos, notes and audio memories from iPhone, Android, tablets or desktop without installing an app.</p></div></article>
-  <article><img src="img/feature-slideshow.jpg" alt="Live slideshow"><div><h2>Live gallery and slideshow</h2><p>Turn uploaded memories into a live slideshow for TVs, projectors or screens at the venue. Use approved or featured content for a polished display.</p></div></article>
-  <article><img src="img/feature-export.jpg" alt="Export album"><div><h2>Download and export</h2><p>After the event, export your album as a ZIP with photos and videos so you can keep everything on your phone or computer.</p></div></article>
+  <article>"""
+    + img("img/feature-branding.jpg", "Album branding customization")
+    + """<div><h2>Branded event album</h2><p>Customize the album name, event type, description, date, location, cover image, banner and color theme so the page feels specific to the event.</p></div></article>
+  <article>"""
+    + img("img/feature-upload.jpg", "Browser-based guest upload page")
+    + """<div><h2>Guest uploads without an app</h2><p>Guests upload from a browser on iPhone, Android, tablets or desktop. That removes app-store friction and improves participation.</p></div></article>
+  <article>"""
+    + img("img/feature-slideshow.jpg", "Live slideshow with guest media")
+    + """<div><h2>Live gallery and slideshow</h2><p>Turn guest media into a live visual wall on a TV or projector. Use approved or featured uploads to keep the presentation polished.</p></div></article>
+  <article>"""
+    + img("img/feature-export.jpg", "ZIP export of event photos")
+    + """<div><h2>ZIP export and long-term backup</h2><p>Download the full event archive after the celebration so you keep every photo and video outside the platform too.</p></div></article>
 </section>
-<section class="section-pad center alt"><h2>Perfect for many types of events</h2><div class="use-grid"><span>Weddings</span><span>Birthdays</span><span>Graduations</span><span>Corporate events</span><span>Quinceañeras</span><span>Baby showers</span><span>Anniversaries</span><span>Family reunions</span><span>School events</span><span>Holiday parties</span></div></section>
-<section class="cta-panel section-pad"><h2>Give every guest a simple way to share memories</h2><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a></section>
-</main>{footer}<script src="js/main.js"></script></body></html>'''
+""",
+    f"""
+<section class="section-pad center alt">
+  <p class="eyebrow">Event coverage</p>
+  <h2>Built for many types of events</h2>
+  <p class="section-lead">MyPhotoQR works across personal celebrations, group travel and business events, with landing pages tuned for each intent.</p>
+  <div class="use-grid">
+    {''.join(f'<span>{event["label"]}</span>' for event in EVENTS)}
+  </div>
+</section>
+""",
+]
 
-pricing = head('MyPhotoQR Pricing | One-Time $19.99 QR Album for One Event', 'Create one QR album for one event with a one-time $19.99 payment. Includes QR links, guest uploads, live gallery, moderation, slideshow, ZIP export and 1 year storage.', 'pricing.html') + f'''
-<body>{nav}<main>
-<section class="page-hero section-pad center"><p class="eyebrow">One event. One payment.</p><h1>Simple pricing for your QR album</h1><p>No monthly subscription. Create one event album and collect memories from your guests.</p></section>
+pricing_sections = [
+    """
 <section class="pricing-wrap section-pad">
   <article class="price-card">
-    <p class="eyebrow">QR Album — one-time payment</p>
+    <p class="eyebrow">One-time payment</p>
     <h2>$19.99</h2>
-    <p class="price-note">Includes 1 album for 1 event with an admin panel.</p>
+    <p class="price-note">One QR album for one event, with admin controls and one year of storage.</p>
     <a class="btn primary full" href="https://app.myphotoqr.com/create">Buy album</a>
     <ul class="check-list">
-      <li>1 event album</li><li>QR code and share links for guests</li><li>Guest uploads from the browser</li><li>Photos, videos, notes and audio memories</li><li>Live gallery for viewing content</li><li>Privacy and visibility controls</li><li>Album configuration: name, description, type, date, location, cover, banner and theme</li><li>Moderation: approve, hide, feature or auto-approve</li><li>Live slideshow for TV or projector</li><li>ZIP export with photos and videos</li><li>1 year active album and storage</li><li>Email support within 24–48 business hours</li>
+      <li>1 event album</li>
+      <li>QR code and guest share link</li>
+      <li>Photo and video uploads from any browser</li>
+      <li>Optional notes and audio memories</li>
+      <li>Live gallery and slideshow</li>
+      <li>Privacy and moderation controls</li>
+      <li>ZIP export</li>
+      <li>1 year active album and storage</li>
     </ul>
   </article>
-  <aside class="include-panel"><h2>What happens after payment?</h2><p>After checkout, you are redirected to your MyPhotoQR account so you can create and manage your album, personalize the experience, and start sharing your QR code.</p><div class="mini-steps"><span>1. Pay securely</span><span>2. Create album</span><span>3. Share QR</span><span>4. Collect memories</span><span>5. Download ZIP</span></div></aside>
+  <aside class="include-panel">
+    <h2>What happens after payment?</h2>
+    <p>After checkout, you create the album, personalize the event page, test the QR code and start sharing with guests before the event begins.</p>
+    <div class="mini-steps">
+      <span>1. Buy the album</span>
+      <span>2. Personalize the page</span>
+      <span>3. Share the QR code</span>
+      <span>4. Collect guest uploads</span>
+      <span>5. Export the archive</span>
+    </div>
+  </aside>
 </section>
-<section class="faq section-pad"><h2>Pricing FAQ</h2>
-  <details><summary>Is this a subscription?</summary><p>No. The $19.99 plan is a one-time payment for one event album.</p></details>
-  <details><summary>How long does the album stay active?</summary><p>The album and uploaded files remain active for 1 year from the album creation date.</p></details>
-  <details><summary>Are audio and notes included?</summary><p>Yes. The paid plan can include photos, videos, audio memories and notes when those upload options are enabled for the album.</p></details>
-  <details><summary>Can I download everything?</summary><p>Yes. You can export the album as a ZIP with photos and videos.</p></details>
+""",
+    """
+<section class="split section-pad alt">
+  <div>
+    <p class="eyebrow">Purchase intent</p>
+    <h2>Simple pricing built for one event</h2>
+    <p>MyPhotoQR is designed for hosts who need one reliable photo-sharing workflow without a subscription, complicated setup or hidden steps before the event.</p>
+  </div>
+  <div class="support-grid single-grid">
+    <article><h3>Buy once</h3><p>One payment covers one event album instead of recurring monthly billing.</p></article>
+    <article><h3>Prepare in advance</h3><p>Create and test everything before the event so guests only see a simple QR flow.</p></article>
+    <article><h3>Keep the archive</h3><p>Download the full ZIP later so your media lives beyond the event itself.</p></article>
+  </div>
 </section>
-</main>{footer}<script src="js/main.js"></script></body></html>'''
+""",
+]
 
-support = head('MyPhotoQR Support | Help for QR Albums, Guest Uploads and Event Galleries', 'Get help with QR albums, guest uploads, live gallery, moderation, slideshow, download export, privacy settings and event setup.', 'support.html') + f'''
-<body>{nav}<main>
-<section class="page-hero section-pad center"><p class="eyebrow">Help when you need it</p><h1>Support for your QR album</h1><p>Questions about setup, QR sharing, guest uploads, moderation, slideshow or exports? We can help.</p></section>
+support_sections = [
+    """
 <section class="support-grid section-pad">
-  <article><h2>Contact support</h2><p>Email us at <a href="mailto:support@myphotoqr.com">support@myphotoqr.com</a>. Standard response time is 24–48 business hours.</p><a class="btn secondary" href="mailto:support@myphotoqr.com">Send email</a></article>
-  <article><h2>Before your event</h2><p>Test your QR, open the upload page from a phone, check your album privacy, and confirm that your slideshow works on the screen you plan to use.</p></article>
-  <article><h2>During your event</h2><p>Place QR signs where guests can see them, keep the link available in messages, and use moderation if you want to review content before it appears.</p></article>
+  <article><h2>Contact support</h2><p>Email <a href="mailto:support@myphotoqr.com">support@myphotoqr.com</a> for help with setup, QR placement ideas, uploads, slideshow preparation and exports.</p></article>
+  <article><h2>Before your event</h2><p>Test the QR code on a phone, review upload permissions and confirm the gallery or slideshow works on the screen you plan to use.</p></article>
+  <article><h2>During your event</h2><p>Use visible QR signage, repeat the link in messages and keep one person ready to monitor uploads if you want moderation turned on.</p></article>
 </section>
-<section class="faq section-pad"><h2>Support FAQ</h2>
-  <details><summary>How do I print my QR code?</summary><p>Download your QR code from the album dashboard and place it on table cards, signs, invitations, screens or event programs.</p></details>
-  <details><summary>What formats are supported?</summary><p>The album is designed for photos, videos, audio memories and notes. Exact upload limits can depend on the active album settings.</p></details>
-  <details><summary>Can guests download the album?</summary><p>The album owner controls export and sharing options. The final ZIP export is available from the admin experience.</p></details>
-  <details><summary>Can I change my album after sharing the QR?</summary><p>Yes. You can update the album name, description, theme, cover, settings and visibility from the admin panel.</p></details>
+""",
+    """
+<section class="split section-pad alt">
+  <div>
+    <p class="eyebrow">Support topics</p>
+    <h2>Common setup issues to avoid</h2>
+    <p>Most event-day issues come from weak QR placement, untested links or last-minute slideshow setup. A quick pre-event check removes most of that risk.</p>
+  </div>
+  <div class="support-grid single-grid">
+    <article><h3>QR too small</h3><p>Use signage large enough for guests to scan from a comfortable distance.</p></article>
+    <article><h3>No reminder to guests</h3><p>Prompt uploads during key moments so participation stays high.</p></article>
+    <article><h3>No export plan</h3><p>Download the ZIP after the event so your final archive is backed up outside the app.</p></article>
+  </div>
 </section>
-<section class="cta-panel section-pad"><h2>Ready to create your event album?</h2><a class="btn primary" href="https://app.myphotoqr.com/create">Buy album</a></section>
-</main>{footer}<script src="js/main.js"></script></body></html>'''
+""",
+]
 
-legal_tpl = lambda title, desc, body: head(title, desc, title.lower().split('|')[0].strip().replace(' ','-')+'.html') + f'<body>{nav}<main><section class="legal section-pad"><h1>{title.split("|")[0].strip()}</h1>{body}</section></main>{footer}<script src="js/main.js"></script></body></html>'
-privacy=legal_tpl('Privacy Policy | MyPhotoQR','Privacy information for MyPhotoQR event album users and guests.','<p>MyPhotoQR is designed to collect event memories through QR links and browser uploads. Album owners control visibility, sharing and moderation settings.</p><p>We collect account, album and upload information needed to operate the service. Uploaded content may include photos, videos, notes and audio memories shared by guests.</p><p>For privacy questions, contact support@myphotoqr.com.</p>')
-terms=legal_tpl('Terms of Service | MyPhotoQR','Terms for using MyPhotoQR QR albums, guest uploads, live gallery and event sharing tools.','<p>By using MyPhotoQR, you agree to use the service lawfully and only upload content you have permission to share. Album owners are responsible for managing guest access and content moderation.</p><p>The one-time event album plan includes the features shown on the pricing page, subject to reasonable technical limits and acceptable use.</p><p>For terms questions, contact support@myphotoqr.com.</p>')
-refunds=legal_tpl('Refund Policy | MyPhotoQR','Refund information for MyPhotoQR one-time QR album purchases.','<p>Because MyPhotoQR provides digital event album access, refund eligibility may depend on whether the album has been created, used, shared or received uploads.</p><p>Contact support@myphotoqr.com with your purchase email and event details. We review requests case by case.</p>')
+events_hub_sections = [
+    """
+<section class="section-pad center">
+  <p class="eyebrow">Topic cluster</p>
+  <h2>Choose the right QR album page for your event</h2>
+  <p class="section-lead">Each event page targets a different intent, use case and guest flow so search engines and visitors both understand how MyPhotoQR fits the event.</p>
+  <div class="benefit-grid link-grid">
+"""
+    + event_cards()
+    + """
+  </div>
+</section>
+""",
+    """
+<section class="split section-pad alt">
+  <div>
+    <p class="eyebrow">Why this helps SEO</p>
+    <h2>More specific pages rank better than one generic event page</h2>
+    <p>Dedicated pages for weddings, birthdays, graduations and corporate events create stronger topical relevance, clearer internal linking and better matching for search intent.</p>
+  </div>
+  <div class="support-grid single-grid">
+    <article><h3>Specific keyword match</h3><p>Each page can target event-specific searches like wedding QR photo sharing or graduation upload link.</p></article>
+    <article><h3>Better internal architecture</h3><p>The hub strengthens crawl paths between the homepage, feature pages and deeper event-specific content.</p></article>
+    <article><h3>Stronger structured data</h3><p>Breadcrumbs, FAQ schema and event-focused page copy help clarify topical intent for each landing page.</p></article>
+  </div>
+</section>
+""",
+]
 
-files={'index.html':home,'how-it-works.html':how,'features.html':features,'pricing.html':pricing,'support.html':support,'privacy.html':privacy,'terms.html':terms,'refunds.html':refunds}
-for name, content in files.items():
-    (root/name).write_text(content, encoding='utf-8')
 
-css = r'''
-:root{--text:#0b0d12;--muted:#666b76;--line:#eceef3;--soft:#f8f7f5;--cream:#fff8ed;--pink:#fff0f7;--blue:#eff8ff;--accent:#ff4f7b;--orange:#ff8a36;--radius:34px;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:#fff}img{max-width:100%;display:block}a{color:inherit;text-decoration:none}.site-header{height:82px;display:flex;align-items:center;gap:28px;max-width:1280px;margin:0 auto;padding:0 28px;position:sticky;top:0;background:rgba(255,255,255,.88);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,13,18,.06);z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em}.brand-logo{width:42px;height:42px;border-radius:0;object-fit:cover;background:transparent;border:0}.nav{display:flex;gap:34px;margin:0 auto;color:#30323a;font-size:15px}.nav a:hover{color:#000}.nav-cta,.btn{border-radius:999px;padding:14px 22px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}.nav-cta,.btn.primary{background:#000;color:#fff}.btn.secondary{border:1px solid var(--line);background:#fff;color:#111}.btn.full{width:100%}.menu-toggle{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}.section-pad{padding:80px 28px;max-width:var(--max);margin:0 auto}.hero{min-height:760px;display:grid;grid-template-columns:1fr;place-items:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 5% 24%,#fff0b8 0,transparent 22%),radial-gradient(circle at 92% 60%,#ffe3ce 0,transparent 22%),linear-gradient(#fff,#fffdfa);max-width:none}.hero-copy{max-width:820px;margin-top:20px}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:900;margin:0 0 16px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(44px,7vw,86px);line-height:.96;letter-spacing:-.07em;margin-bottom:22px}h2{font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.06em;margin-bottom:18px}h3{font-size:22px;letter-spacing:-.04em;margin-bottom:8px}p{color:var(--muted);line-height:1.65;font-size:17px}.hero-copy>p:not(.eyebrow){font-size:19px}.hero-actions{display:flex;gap:12px;justify-content:center;margin:28px 0 12px}.microcopy{font-size:14px!important}.hero-visual{width:min(390px,80vw);margin-top:36px}.hero-visual img{border-radius:46px}.floating-badge{position:absolute;background:#fff;border:1px solid var(--line);border-radius:26px;padding:16px 18px;display:flex;align-items:center;gap:12px;font-weight:800;transform:rotate(-8deg)}.floating-badge img{width:38px;height:38px;border-radius:12px;object-fit:cover}.badge-left{left:7%;top:38%}.badge-right{right:9%;top:47%;transform:rotate(7deg)}.center{text-align:center}.compact{padding-top:70px}.section-lead{max-width:680px;margin:0 auto 44px}.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:left}.benefit-grid article,.support-grid article,.price-card,.include-panel{border:1px solid var(--line);border-radius:var(--radius);padding:32px;background:#fff}.benefit-grid img{width:58px;height:58px;border-radius:0;object-fit:cover;margin-bottom:22px}.alt{background:linear-gradient(110deg,var(--cream),#fff 50%,var(--blue));max-width:none}.split{display:grid;grid-template-columns:minmax(0,560px) minmax(0,560px);justify-content:center;gap:70px;align-items:center}.split>div:first-child{max-width:560px;justify-self:center}.image-board img{border-radius:38px}.text-link{font-weight:900;border-bottom:2px solid #000}.pill-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:900px;margin:32px auto 0}.pill-row span,.use-grid span{border:1px solid var(--line);border-radius:999px;padding:14px 18px;font-weight:800;background:#fff}.cta-panel{text-align:center;background:linear-gradient(120deg,#fff7e8,#fff,#f4f8ff);border-radius:46px;margin-bottom:80px}.alt+.cta-panel{margin-top:40px}.cta-panel p{max-width:650px;margin:0 auto 28px}.page-hero{padding-top:96px;padding-bottom:42px}.page-hero p:not(.eyebrow){max-width:740px;margin:0 auto}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:46px}.timeline article{text-align:center}.step-icon{margin:0 auto 28px}.step-icon img{width:64px;height:64px;object-fit:contain;border-radius:0}.faq{max-width:880px}.faq h2{text-align:center}.faq details{border-top:1px solid var(--line);padding:24px 0}.faq details:last-child{border-bottom:1px solid var(--line)}.faq summary{font-weight:900;font-size:20px;cursor:pointer;letter-spacing:-.03em}.faq p{margin:12px 0 0}.feature-list{display:grid;gap:26px}.feature-list article{display:grid;grid-template-columns:260px 1fr;gap:38px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:26px}.feature-list img{height:180px;width:260px;object-fit:cover;border-radius:28px}.use-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;max-width:900px;margin:36px auto 0}.pricing-wrap{display:grid;grid-template-columns:minmax(320px,520px) 1fr;gap:38px;align-items:start}.price-card h2{font-size:72px}.price-note{margin-top:-10px}.check-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}.check-list li{padding-left:30px;position:relative;color:#30323a}.check-list li:before{content:"✓";position:absolute;left:0;top:0;font-weight:900;color:#03a57a}.mini-steps{display:grid;gap:12px;margin-top:26px}.mini-steps span{padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:18px;font-weight:800}.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.legal{max-width:860px}.footer{border-top:1px solid var(--line);padding:46px 28px;max-width:1280px;margin:0 auto;display:grid;gap:24px}.footer p{max-width:520px;font-size:15px}.footer-links{display:flex;flex-wrap:wrap;gap:20px;font-weight:800}.copyright{font-size:13px!important;color:#8a8f98}@media(max-width:900px){.site-header{height:auto;min-height:72px;flex-wrap:wrap}.menu-toggle{display:block;margin-left:auto}.nav,.nav-cta{display:none}.nav.open{display:flex;order:5;width:100%;flex-direction:column;gap:12px;padding:18px 0}.hero{min-height:auto;padding-top:42px}.hero-actions{flex-direction:column}.floating-badge{display:none}.benefit-grid,.timeline,.support-grid,.pricing-wrap,.split{grid-template-columns:1fr}.split>div:first-child{justify-self:auto}.feature-list article{grid-template-columns:1fr}.feature-list img{width:100%;height:auto}h1{font-size:46px}.section-pad{padding:58px 20px}.page-hero{padding-top:58px}.cta-panel{border-radius:32px;margin-left:20px;margin-right:20px}}'''
-css += "\n.image-board{display:grid;gap:18px}\n.flowbar{max-width:980px;margin:0 auto;position:relative;--flowpad:80px}.flowbar-track{position:absolute;top:calc(var(--flowpad) + 62px);left:6%;right:6%;height:10px;border-radius:999px;background:linear-gradient(90deg,#ffe08f,#ff66b7,#a98bff,#8fd0ff);opacity:.95;z-index:1}.flowbar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;text-align:center;z-index:2}.flowbar-icon{width:124px;height:124px;border:4px solid #050505;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#fff;box-shadow:0 18px 34px rgba(11,13,18,.10);position:relative;z-index:2}.flowbar-icon img{width:44px;height:44px;object-fit:contain;border-radius:0}.flowbar-grid h3{font-size:30px;letter-spacing:-.05em;margin:0 0 10px}.flowbar-grid p{margin:0 auto;max-width:320px}.flowbar-grid .btn{margin-top:14px}@media(max-width:900px){.flowbar{--flowpad:58px}.flowbar-track{display:none}.flowbar-grid{grid-template-columns:1fr;gap:26px}.flowbar-icon{box-shadow:0 10px 20px rgba(11,13,18,.10)}}.page-hero+.flowbar.section-pad{padding-top:40px;--flowpad:40px}@media(max-width:900px){.page-hero+.flowbar.section-pad{padding-top:24px;--flowpad:24px}}\n"
-(root/'css/styles.css').write_text(css,encoding='utf-8')
-js="""const menuButton=document.querySelector('[data-menu-toggle]');const nav=document.querySelector('[data-nav]');if(menuButton&&nav){menuButton.addEventListener('click',()=>nav.classList.toggle('open'));}"""
-(root/'js/main.js').write_text(js,encoding='utf-8')
+def event_page(event):
+    title = f'{event["label"]} QR Album | MyPhotoQR Event Photo Sharing'
+    description = event["description"]
+    canonical = f'{event["slug"]}.html'
+    trail = [
+        ("Home", f"{SITE_URL}/"),
+        ("Events", f"{SITE_URL}/events.html"),
+        (event["label"], absolute(canonical)),
+    ]
+    faq_items = [
+        (
+            f'Do guests need an app to upload {event["event_name"]} photos?',
+            "No. Guests scan your QR code and upload from their browser on iPhone, Android, tablet or desktop.",
+        ),
+        (
+            "Can I review uploads before they appear in the gallery?",
+            "Yes. You can turn moderation on, keep uploads pending, hide content or feature the best moments.",
+        ),
+        (
+            "Can I download everything after the event?",
+            "Yes. You can export a ZIP file with your event photos and videos after the celebration.",
+        ),
+    ]
+    related = [other for other in EVENTS if other["slug"] != event["slug"]][:4]
+    related_cards = "".join(
+        f'<article><h3><a href="{other["slug"]}.html">{other["label"]}</a></h3><p>{escape(other["description"])}</p></article>'
+        for other in related
+    )
+    body = render_breadcrumbs([("Home", "/"), ("Events", "events.html"), (event["label"], absolute(canonical))])
+    body += f"""
+<section class="page-hero section-pad center">
+  <p class="eyebrow">Events · {escape(event["label"])}</p>
+  <h1>{escape(event["hero_title"])}</h1>
+  <p>{escape(event["hero_copy"])}</p>
+  <div class="hero-actions">
+    <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a>
+    <a class="btn secondary" href="how-it-works.html">See how it works</a>
+  </div>
+  <p class="microcopy">{escape(event["eyebrow"])}</p>
+  <div class="hero-visual event-hero-visual">
+    {img(event["image"], f'{event["label"]} QR album preview', eager=True)}
+  </div>
+</section>
 
-# placeholder manifest
-(root/'IMG_REFERENCES.txt').write_text('''Replace these referenced images with your final files:\n\nimg/logo-myphotoqr.jpg\nimg/favicon.png\nimg/og-myphotoqr.jpg\nimg/home-phone-mockup.jpg\nimg/event-collage.jpg\nimg/icon-gallery.png\nimg/icon-qr.png\nimg/icon-upload.png\nimg/icon-slideshow.png\nimg/icon-download.png\nimg/feature-branding.jpg\nimg/feature-upload.jpg\nimg/feature-slideshow.jpg\nimg/feature-export.jpg\n''',encoding='utf-8')
+<section class="section-pad compact center">
+  <h2>Why MyPhotoQR works well for {escape(event["label"].lower())}</h2>
+  <p class="section-lead">Guests already have their phones out. A simple QR code gives them a frictionless way to upload photos and videos before those moments disappear into private chats.</p>
+  <div class="benefit-grid">
+    <article><h3>Simple guest experience</h3><p>Scan the QR, open the browser, upload. No app store or account creation slows guests down.</p></article>
+    <article><h3>Better media collection</h3><p>Capture candid angles, guest perspectives and spontaneous moments you would never receive later.</p></article>
+    <article><h3>Optional moderation</h3><p>Review content before it reaches the live gallery or slideshow when you want tighter control.</p></article>
+    <article><h3>Complete archive</h3><p>Keep one private album during the event and one ZIP archive after the event.</p></article>
+  </div>
+</section>
+
+<section class="split section-pad alt">
+  <div>
+    <p class="eyebrow">Best placement ideas</p>
+    <h2>Where to put the QR code for higher participation</h2>
+    <p>{escape(event["placements"])}</p>
+    <a class="text-link" href="features.html">Explore features</a>
+  </div>
+  <div class="usecase-steps">
+    <div class="usecase-step">
+      {img("img/scanning.jpg", "Guest scanning the QR code")}
+      <p><strong>Step 1:</strong> Guests scan the QR code from a sign, table card or screen.</p>
+    </div>
+    <div class="usecase-step">
+      {img("img/feature-upload.jpg", "Guest uploading event media from the browser")}
+      <p><strong>Step 2:</strong> They upload photos or videos directly from their phone browser.</p>
+    </div>
+    <div class="usecase-step">
+      {img("img/feature-slideshow.jpg", "Event slideshow fed by guest uploads")}
+      <p><strong>Step 3:</strong> You review, feature or display the best moments in the live gallery and slideshow.</p>
+    </div>
+  </div>
+</section>
+
+<section class="split section-pad">
+  <div>
+    <h2>What hosts usually want from a {escape(event["event_name"])} album</h2>
+    <p>They want a fast setup, high guest participation, privacy controls during the event and a reliable way to keep the full archive after the event ends.</p>
+    <ul class="check-list compact-list">
+      <li>One QR code guests can use instantly</li>
+      <li>One upload page that works on any phone</li>
+      <li>One private gallery with moderation controls</li>
+      <li>One ZIP export for long-term storage</li>
+    </ul>
+  </div>
+  <div class="include-panel">
+    <h3>Included with every album</h3>
+    <div class="mini-steps">
+      <span>QR sharing</span>
+      <span>Live gallery</span>
+      <span>Slideshow support</span>
+      <span>Moderation controls</span>
+      <span>ZIP export</span>
+    </div>
+  </div>
+</section>
+
+{render_faq(faq_items, f'{event["label"]} QR album FAQ')}
+
+<section class="section-pad center">
+  <p class="eyebrow">Related pages</p>
+  <h2>Explore other event photo sharing pages</h2>
+  <div class="benefit-grid link-grid">
+    {related_cards}
+  </div>
+</section>
+
+<section class="cta-panel section-pad">
+  <h2>Ready to collect {escape(event["label"].lower())} memories?</h2>
+  <p>Create the QR album before the event so guests have a simple, visible way to upload from the first minute.</p>
+  <a class="btn primary" href="https://app.myphotoqr.com/create">Create album</a>
+</section>
+"""
+    schema = [
+        webpage_schema(title, description, canonical, event["image"], [event["label"], f'{event["label"]} photo sharing', "QR album"]),
+        breadcrumb_schema(trail),
+        faq_schema(faq_items),
+    ]
+    return page(title, description, canonical, event["image"], body, schema, body_class="events-page")
+
+
+home = page(
+    "MyPhotoQR | QR Album for Event Photo Sharing, No App Needed",
+    "Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.",
+    "",
+    "img/og-myphotoqr.jpg",
+    home_body,
+    [
+        webpage_schema(
+            "MyPhotoQR | QR Album for Event Photo Sharing, No App Needed",
+            "Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.",
+            "",
+            "img/og-myphotoqr.jpg",
+            ["QR album", "Event photo sharing", "Guest photo upload"],
+        ),
+        {
+            "@type": "ItemList",
+            "name": "Event QR album landing pages",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": index,
+                    "url": absolute(f'{event["slug"]}.html'),
+                    "name": event["label"],
+                }
+                for index, event in enumerate(EVENTS, start=1)
+            ],
+        },
+        faq_schema(FAQ_HOME),
+    ],
+)
+
+how = informational_page(
+    "How MyPhotoQR Works | Create, Share, Collect and Download Event Photos",
+    "Learn how to create a QR album, personalize it, share QR links with guests, collect photos and videos in real time, and export your event memories.",
+    "how-it-works.html",
+    "img/feature-upload.jpg",
+    "Simple from the first scan",
+    "How MyPhotoQR works",
+    "Create the album, share the QR code, collect guest uploads in real time and export the full archive after the event.",
+    how_sections,
+    FAQ_HOW,
+    ["How QR photo sharing works", "Guest uploads", "Event gallery workflow"],
+)
+
+features = informational_page(
+    "MyPhotoQR Features | QR Event Album, Live Gallery, Moderation and Export",
+    "Explore MyPhotoQR features: custom QR album, guest photo and video uploads, live slideshow, privacy code, moderation, branding and ZIP export.",
+    "features.html",
+    "img/feature-slideshow.jpg",
+    "Made for event memories",
+    "Features that make event photo sharing easier",
+    "Everything you need to collect, organize, moderate, display and keep the best content from your event.",
+    features_sections,
+    FAQ_FEATURES,
+    ["QR event album features", "Live gallery", "Event slideshow", "ZIP export"],
+)
+
+pricing = informational_page(
+    "MyPhotoQR Pricing | One-Time $19.99 QR Album for One Event",
+    "Create one QR album for one event with a one-time $19.99 payment. Includes QR links, guest uploads, live gallery, moderation, slideshow, ZIP export and one year of storage.",
+    "pricing.html",
+    "img/feature-export.jpg",
+    "One event. One payment.",
+    "Simple pricing for your QR album",
+    "No monthly subscription. Buy one event album, share your QR code and collect guest media without ongoing fees.",
+    pricing_sections,
+    FAQ_PRICING,
+    ["MyPhotoQR pricing", "One-time event album", "QR photo sharing cost"],
+)
+
+support = informational_page(
+    "MyPhotoQR Support | Help for QR Albums, Guest Uploads and Event Galleries",
+    "Get help with QR albums, guest uploads, live gallery, moderation, slideshow, download export, privacy settings and event setup.",
+    "support.html",
+    "img/scanning.jpg",
+    "Help when you need it",
+    "Support for your QR album",
+    "Questions about QR sharing, guest uploads, moderation, slideshow setup or final exports? This page covers the most common support topics.",
+    support_sections,
+    FAQ_SUPPORT,
+    ["QR album support", "Event gallery help", "Guest upload troubleshooting"],
+)
+
+events_hub = informational_page(
+    "Events QR Album Pages | MyPhotoQR Use Cases for Weddings, Parties and Trips",
+    "Explore QR album pages for weddings, birthdays, graduations, corporate events, quinceañeras, baby showers, group trips and more.",
+    "events.html",
+    "img/event-collage.jpg",
+    "Use cases and landing pages",
+    "QR album pages for every type of event",
+    "Each event page explains how MyPhotoQR fits a specific celebration or gathering, with setup ideas, placement tips and answers to common questions.",
+    events_hub_sections,
+    [
+        (
+            "Why does MyPhotoQR have separate pages for different event types?",
+            "Because guests, hosts and searchers often have different needs depending on the event. Separate pages let us explain those differences clearly.",
+        ),
+        (
+            "Can the same MyPhotoQR product work for all these event types?",
+            "Yes. The same core product works across many event types, but the best setup and messaging can vary based on the occasion.",
+        ),
+    ],
+    ["Event QR album use cases", "Wedding photo sharing", "Corporate event photo sharing"],
+)
+
+
+def legal_page(title, description, canonical, body_copy):
+    breadcrumb = render_breadcrumbs([("Home", "/"), (title.split("|")[0].strip(), absolute(canonical))])
+    body = (
+        breadcrumb
+        + f"""
+<section class="legal section-pad">
+  <h1>{escape(title.split('|')[0].strip())}</h1>
+  {body_copy}
+</section>
+"""
+    )
+    schema = [
+        webpage_schema(title, description, canonical, "img/og-myphotoqr.jpg", [title.split("|")[0].strip(), "MyPhotoQR policies"]),
+        breadcrumb_schema([("Home", f"{SITE_URL}/"), (title.split("|")[0].strip(), absolute(canonical))]),
+    ]
+    return page(title, description, canonical, "img/og-myphotoqr.jpg", body, schema)
+
+
+privacy = legal_page(
+    "Privacy Policy | MyPhotoQR",
+    "Privacy information for MyPhotoQR event album users and guests.",
+    "privacy.html",
+    """
+<p>MyPhotoQR is designed to collect event memories through QR links and browser uploads. Album owners control visibility, sharing and moderation settings.</p>
+<p>We collect the account, album and upload information required to operate the service. Uploaded content can include photos, videos, notes and audio memories shared by guests.</p>
+<p>For privacy questions, contact <a href="mailto:support@myphotoqr.com">support@myphotoqr.com</a>.</p>
+""",
+)
+
+terms = legal_page(
+    "Terms of Service | MyPhotoQR",
+    "Terms for using MyPhotoQR QR albums, guest uploads, live gallery and event sharing tools.",
+    "terms.html",
+    """
+<p>By using MyPhotoQR, you agree to use the service lawfully and only upload content you have permission to share. Album owners are responsible for managing guest access and content moderation.</p>
+<p>The one-time event album plan includes the features shown on the pricing page, subject to reasonable technical limits and acceptable use.</p>
+<p>For questions about these terms, contact <a href="mailto:support@myphotoqr.com">support@myphotoqr.com</a>.</p>
+""",
+)
+
+refunds = legal_page(
+    "Refund Policy | MyPhotoQR",
+    "Refund information for MyPhotoQR one-time QR album purchases.",
+    "refunds.html",
+    """
+<p>Because MyPhotoQR provides digital event album access, refund eligibility can depend on whether the album has been created, shared or used to receive uploads.</p>
+<p>Contact <a href="mailto:support@myphotoqr.com">support@myphotoqr.com</a> with your purchase email and event details. Refund requests are reviewed case by case.</p>
+""",
+)
+
+
+FILES = {
+    "index.html": home,
+    "how-it-works.html": how,
+    "features.html": features,
+    "pricing.html": pricing,
+    "support.html": support,
+    "events.html": events_hub,
+    "privacy.html": privacy,
+    "terms.html": terms,
+    "refunds.html": refunds,
+}
+
+for event in EVENTS:
+    FILES[f'{event["slug"]}.html'] = event_page(event)
+
+
+CSS = r"""
+:root{--text:#0b0d12;--muted:#666b76;--line:#eceef3;--soft:#f8f7f5;--cream:#fff8ed;--blue:#eff8ff;--accent:#ff4f7b;--radius:34px;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:#fff}img{max-width:100%;display:block}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(44px,7vw,82px);line-height:.96;letter-spacing:-.07em;margin-bottom:22px}h2{font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.06em;margin-bottom:18px}h3{font-size:22px;letter-spacing:-.04em;margin-bottom:10px}p{color:var(--muted);line-height:1.68;font-size:17px}.site-header{height:82px;display:flex;align-items:center;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px;position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,13,18,.06);z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em}.brand-logo{width:42px;height:42px;object-fit:cover}.nav{display:flex;gap:30px;margin:0 auto;color:#30323a;font-size:15px;align-items:center}.nav a:hover,.nav-dropdown-toggle:hover{color:#000}.nav-cta,.btn{border-radius:999px;padding:14px 22px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}.nav-cta,.btn.primary{background:#000;color:#fff}.btn.secondary{border:1px solid var(--line);background:#fff;color:#111}.btn.full{width:100%}.menu-toggle{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}.nav-dropdown{position:relative;display:flex;align-items:center}.nav-dropdown-toggle{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;font-size:15px}.nav-dropdown-menu{display:none;position:absolute;top:100%;left:-16px;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px 10px 10px;box-shadow:0 18px 40px rgba(11,13,18,.08);z-index:30}.nav-dropdown-menu a{display:block;padding:10px 14px;border-radius:14px;font-weight:800}.nav-dropdown-menu a:hover{background:var(--soft)}.nav-dropdown.open .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown:hover .nav-dropdown-menu{display:block}.section-pad{padding:80px 28px;max-width:var(--max);margin:0 auto}.breadcrumbs{padding-top:26px;padding-bottom:0;display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:#5b6170}.breadcrumbs a{font-weight:700}.breadcrumbs-sep{color:#a6abb4}.hero{min-height:760px;display:grid;grid-template-columns:1fr;place-items:center;justify-items:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 5% 24%,#fff0b8 0,transparent 22%),radial-gradient(circle at 92% 60%,#ffe3ce 0,transparent 22%),linear-gradient(#fff,#fffdfa);max-width:none}.hero-copy{width:100%;max-width:760px;margin:20px auto 0;padding-inline:20px;display:grid;justify-items:center}.hero-copy>p:not(.eyebrow):not(.microcopy){max-width:30ch;font-size:19px}.hero-actions{display:flex;gap:12px;justify-content:center;margin:28px 0 12px;flex-wrap:wrap}.microcopy{font-size:14px!important}.hero-visual{width:min(700px,96vw);margin-inline:auto}.hero-visual img,.event-hero-visual img{border-radius:42px}.hero-float-media{position:absolute;width:170px;height:170px;object-fit:cover;border-radius:999px;border:1px solid var(--line);box-shadow:0 18px 40px rgba(11,13,18,.1);background:#fff}.hero-float-left{left:7%;top:38%;transform:rotate(-8deg)}.hero-float-right{right:9%;top:47%;transform:rotate(7deg)}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:900;margin:0 0 16px}.center{text-align:center}.compact{padding-top:60px}.section-lead{max-width:720px;margin:0 auto 44px}.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:left}.benefit-grid article,.support-grid article,.price-card,.include-panel,.timeline article,.legal,.faq details{border:1px solid var(--line);border-radius:var(--radius);padding:30px;background:#fff}.link-grid article{display:flex;flex-direction:column;justify-content:space-between}.alt{background:linear-gradient(110deg,var(--cream),#fff 50%,var(--blue));max-width:none}.split{display:grid;grid-template-columns:minmax(0,560px) minmax(0,560px);justify-content:center;gap:70px;align-items:center}.image-board,.usecase-steps{display:grid;gap:18px}.image-board img{border-radius:34px}.usecase-step{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;border:1px solid var(--line);border-radius:28px;padding:16px 18px;background:#fff}.usecase-step img{width:120px;height:120px;border-radius:24px;object-fit:cover}.usecase-step p{margin:0}.text-link{font-weight:900;border-bottom:2px solid #000;width:max-content}.pill-row,.use-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:940px;margin:32px auto 0}.pill-row span,.use-grid span{border:1px solid var(--line);border-radius:999px;padding:14px 18px;font-weight:800;background:#fff}.cta-panel{text-align:center;background:linear-gradient(120deg,#fff7e8,#fff,#f4f8ff);border-radius:46px;margin-bottom:80px}.cta-panel p{max-width:650px;margin:0 auto 28px}.page-hero{padding-top:40px;padding-bottom:42px}.page-hero p:not(.eyebrow){max-width:760px;margin:0 auto}.event-hero-visual{max-width:860px;margin:26px auto 0}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.feature-list{display:grid;gap:26px}.feature-list article{display:grid;grid-template-columns:260px 1fr;gap:38px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:26px}.feature-list img{height:180px;width:260px;object-fit:cover;border-radius:28px}.pricing-wrap{display:grid;grid-template-columns:minmax(320px,520px) 1fr;gap:38px;align-items:start}.price-card h2{font-size:72px}.price-note{margin-top:-10px}.check-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}.compact-list{margin-top:20px}.check-list li{padding-left:30px;position:relative;color:#30323a}.check-list li:before{content:"✓";position:absolute;left:0;top:0;font-weight:900;color:#03a57a}.mini-steps{display:grid;gap:12px;margin-top:26px}.mini-steps span{padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:18px;font-weight:800}.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.single-grid{grid-template-columns:1fr}.faq{max-width:920px}.faq h2{text-align:center}.faq details{padding:24px 30px}.faq summary{font-weight:900;font-size:20px;cursor:pointer;letter-spacing:-.03em}.faq p{margin:12px 0 0}.legal{max-width:860px}.footer{border-top:1px solid var(--line);padding:46px 28px;max-width:1280px;margin:0 auto;display:grid;gap:24px}.footer p{max-width:620px;font-size:15px}.footer-links{display:flex;flex-wrap:wrap;gap:18px;font-weight:800}.footer-events a{font-weight:700}.copyright{font-size:13px!important;color:#8a8f98}.flowbar{max-width:980px;margin:0 auto;position:relative;--flowpad:80px}.flowbar-track{position:absolute;top:calc(var(--flowpad) + 62px);left:6%;right:6%;height:10px;border-radius:999px;background:linear-gradient(90deg,#ffe08f,#ff66b7,#a98bff,#8fd0ff);opacity:.95;z-index:1}.flowbar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;text-align:center;z-index:2}.flowbar-icon{width:124px;height:124px;border:4px solid #050505;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#fff;box-shadow:0 18px 34px rgba(11,13,18,.1);position:relative;z-index:2}.flowbar-icon img{width:44px;height:44px;object-fit:contain}.events-page .hero-copy{max-width:820px}@media(max-width:900px){.site-header{height:auto;min-height:72px;flex-wrap:wrap}.menu-toggle{display:block;margin-left:auto}.nav,.nav-cta{display:none}.nav.open{display:flex;order:5;width:100%;flex-direction:column;gap:12px;padding:18px 0}.nav-dropdown{width:100%;flex-direction:column;align-items:flex-start}.nav-dropdown-toggle{width:100%;text-align:left;padding:14px 0;font-weight:800}.nav-dropdown-menu{position:static;box-shadow:none;border:0;padding:0;margin:0 0 8px;display:none;min-width:auto;width:100%}.nav-dropdown.open .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{display:block}.nav-dropdown-menu a{padding:10px 0;border-radius:0;font-weight:700}.nav-dropdown-menu a:hover{background:transparent}.section-pad{padding:58px 20px}.hero{min-height:auto;padding-top:42px}.hero-actions{flex-direction:column}.hero-float-media{display:none}.hero-visual{width:min(320px,84vw)}.benefit-grid,.timeline,.support-grid,.pricing-wrap,.split,.feature-list article{grid-template-columns:1fr}.feature-list img{width:100%;height:auto}.usecase-step{grid-template-columns:1fr}.usecase-step img{width:100%;height:auto}h1{font-size:46px}.page-hero{padding-top:24px}.cta-panel{border-radius:32px;margin-left:20px;margin-right:20px}.flowbar{--flowpad:58px}.flowbar-track{display:none}.flowbar-grid{grid-template-columns:1fr;gap:26px}.faq details{padding:22px}}"""
+
+
+JS = """const menuButton=document.querySelector('[data-menu-toggle]');const nav=document.querySelector('[data-nav]');if(menuButton&&nav){menuButton.addEventListener('click',()=>nav.classList.toggle('open'));}document.querySelectorAll('[data-dropdown]').forEach(dropdown=>{const button=dropdown.querySelector('.nav-dropdown-toggle');if(!button)return;button.addEventListener('click',()=>{const expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));dropdown.classList.toggle('open',!expanded);});});"""
+
+
+MANIFEST = {
+    "name": "MyPhotoQR",
+    "short_name": "MyPhotoQR",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "description": "QR albums for event photo and video sharing without an app.",
+    "icons": [
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png",
+        },
+        {
+            "src": "/favicon-48x48.png",
+            "sizes": "48x48",
+            "type": "image/png",
+        },
+    ],
+}
+
+
+for filename, content in FILES.items():
+    (ROOT / filename).write_text(content, encoding="utf-8")
+
+(ROOT / "css" / "styles.css").write_text(CSS, encoding="utf-8")
+(ROOT / "js" / "main.js").write_text(JS, encoding="utf-8")
+(ROOT / "manifest.webmanifest").write_text(json.dumps(MANIFEST, ensure_ascii=False, indent=2), encoding="utf-8")
+
+sitemap_urls = [
+    ("", "weekly", "1.0"),
+    ("how-it-works.html", "monthly", "0.85"),
+    ("features.html", "monthly", "0.85"),
+    ("pricing.html", "monthly", "0.8"),
+    ("support.html", "monthly", "0.7"),
+    ("events.html", "monthly", "0.8"),
+]
+sitemap_urls.extend((f'{event["slug"]}.html', "monthly", "0.75") for event in EVENTS)
+sitemap_urls.extend(
+    [
+        ("privacy.html", "yearly", "0.3"),
+        ("terms.html", "yearly", "0.3"),
+        ("refunds.html", "yearly", "0.3"),
+    ]
+)
+
+sitemap_parts = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+for loc, changefreq, priority in sitemap_urls:
+    sitemap_parts.append("  <url>")
+    sitemap_parts.append(f"    <loc>{absolute(loc)}</loc>")
+    sitemap_parts.append(f"    <lastmod>{TODAY}</lastmod>")
+    sitemap_parts.append(f"    <changefreq>{changefreq}</changefreq>")
+    sitemap_parts.append(f"    <priority>{priority}</priority>")
+    sitemap_parts.append("  </url>")
+sitemap_parts.append("</urlset>")
+(ROOT / "sitemap.xml").write_text("\n".join(sitemap_parts) + "\n", encoding="utf-8")
+
+(ROOT / "robots.txt").write_text(
+    "User-agent: *\nAllow: /\n\nHost: https://www.myphotoqr.com\nSitemap: https://www.myphotoqr.com/sitemap.xml\n",
+    encoding="utf-8",
+)
