@@ -49,7 +49,7 @@ EVENTS = [
         "hero_title": "Anniversary photo sharing with one QR album",
         "description": "Collect anniversary celebration photos and videos in one QR album guests can use without an app. Keep memories private, feature the best uploads, and download everything afterward.",
         "hero_copy": "Make it easy for family and friends to share toasts, throwback photos and new memories with one QR code and one private event gallery.",
-        "image": "img/anniversarie-slideshow.jpg",
+        "image": "img/anniversary-slideshow.jpg",
         "eyebrow": "One private album for family memories and tributes",
         "placements": "Memory table, dinner menus, anniversary slideshow and family WhatsApp message.",
     },
@@ -104,7 +104,7 @@ EVENTS = [
         "hero_title": "Farewell party photo sharing with one QR album",
         "description": "Collect farewell party photos, videos and messages in one QR album guests can use from any phone browser. Keep every memory together and export the full archive later.",
         "hero_copy": "Make it easy for everyone to share group photos, speeches and candid goodbye moments in one place before the night ends.",
-        "image": "img/farewerll-slideshow.jpg",
+        "image": "img/farewell-slideshow.jpg",
         "eyebrow": "Photos, speeches and goodbye messages in one album",
         "placements": "Entrance sign, memory wall, group dinner tables, projector screen and post-party message.",
     },
@@ -122,6 +122,108 @@ EVENTS = [
 ]
 
 EVENT_LOOKUP = {event["slug"]: event for event in EVENTS}
+
+IMAGE_DIMENSIONS = {
+    "img/15-slideshow.jpg": (1200, 750),
+    "img/anniversary-slideshow.jpg": (1200, 750),
+    "img/babyshower-slideshow.jpg": (1200, 750),
+    "img/corporate-slideshow.jpg": (1200, 750),
+    "img/event-collage.jpg": (1100, 963),
+    "img/farewell-slideshow.jpg": (1200, 750),
+    "img/feature-branding.jpg": (1200, 750),
+    "img/feature-export.jpg": (1200, 750),
+    "img/feature-slideshow.jpg": (1200, 750),
+    "img/feature-upload.jpg": (1200, 750),
+    "img/grad-slideshow.jpg": (1200, 750),
+    "img/home-phone-mockup.jpg": (1200, 750),
+    "img/icon-download.png": (512, 512),
+    "img/icon-event.png": (512, 512),
+    "img/icon-gallery.png": (512, 512),
+    "img/icon-moderation.png": (512, 512),
+    "img/icon-qr.png": (512, 512),
+    "img/icon-slideshow.png": (512, 512),
+    "img/icon-theme.png": (512, 512),
+    "img/icon-upload.png": (512, 512),
+    "img/logo-myphotoqr.png": (784, 784),
+    "img/og-myphotoqr.jpg": (1200, 630),
+    "img/religious-slideshow.jpg": (1200, 750),
+    "img/scanning.jpg": (1200, 1200),
+    "img/trip-slideshow.jpg": (1200, 750),
+    "img/wedding-slideshow.jpg": (1200, 750),
+}
+
+EVENT_SEO = {
+    "weddings": {
+        "title": "Wedding Photo Sharing QR Code | Collect Guest Photos with MyPhotoQR",
+        "description": "Create a wedding photo sharing QR code so guests can upload photos and videos with no app. Collect candid guest moments, run a live gallery and download the archive.",
+        "anchor": "QR photo album for weddings",
+        "intent": "A wedding QR photo album works best when it is visible before the reception starts and easy to scan throughout the night.",
+        "use_cases": ["Welcome signs and seating charts", "Cocktail hour and reception tables", "Photo booth backdrops and DJ screens", "Thank-you cards after the wedding"],
+    },
+    "birthdays": {
+        "title": "Birthday Party Photo Sharing QR Code | MyPhotoQR QR Album",
+        "description": "Use a birthday party photo sharing QR code to collect guest photos and videos in one private album. No app required, with live gallery, moderation and ZIP export.",
+        "anchor": "birthday party photo sharing QR code",
+        "intent": "Birthday parties move quickly, so the QR code should be placed where guests naturally pause, gather and take photos.",
+        "use_cases": ["Kids' birthday parties", "Milestone birthdays", "Surprise parties", "Backyard parties and family dinners"],
+    },
+    "graduations": {
+        "title": "Graduation Photo Sharing QR Code | Collect Guest Photos & Videos",
+        "description": "Collect graduation photos and videos with one QR code guests can scan from any phone. Build a live album for ceremony moments, family photos and after-party uploads.",
+        "anchor": "graduation photo sharing QR code",
+        "intent": "Graduation albums need to capture formal moments, family snapshots and the casual celebration that happens afterward.",
+        "use_cases": ["Graduation ceremonies", "School and campus events", "Family celebrations", "After-parties and brunches"],
+    },
+    "anniversaries": {
+        "title": "Anniversary Photo Sharing QR Code | Collect Family Memories",
+        "description": "Create an anniversary photo sharing QR code for family and friends. Collect photos, videos and tribute moments in one private album with no app required.",
+        "anchor": "anniversary photo sharing QR code",
+        "intent": "Anniversary events often mix old memories with new photos, so the album should invite guests to share both.",
+        "use_cases": ["Memory tables", "Dinner menus", "Family slideshow screens", "Post-event family messages"],
+    },
+    "corporate-events": {
+        "title": "Corporate Event Photo Sharing QR Code | Attendee Upload Album",
+        "description": "Collect corporate event, conference and retreat photos with a branded QR upload album. Attendees upload from a browser while your team reviews and exports content.",
+        "anchor": "corporate event photo sharing QR code",
+        "intent": "Business events need a branded, low-friction upload flow that works for attendees, staff, partners and sponsors.",
+        "use_cases": ["Conferences and expos", "Company retreats", "Brand activations", "Team-building events"],
+    },
+    "baby-showers": {
+        "title": "Baby Shower Photo Sharing QR Code | Collect Guest Photos",
+        "description": "Create a baby shower photo sharing QR code so guests can upload photos, videos and sweet messages with no app. Keep everything in one private QR album.",
+        "anchor": "baby shower photo sharing QR code",
+        "intent": "Baby shower albums should make it easy to collect gift moments, family photos and short messages from guests.",
+        "use_cases": ["Gift tables and dessert stations", "Welcome signs", "Favor tags", "Thank-you follow-ups"],
+    },
+    "quinceaneras": {
+        "title": "Quinceañera Photo Sharing QR Code | QR Album for Guest Photos",
+        "description": "Collect quinceañera guest photos and videos with one QR code. Guests upload without an app, and you can show a live slideshow and download the final album.",
+        "anchor": "quinceañera photo sharing QR code",
+        "intent": "A quinceañera QR album should support invitations, entrance displays, table cards and live celebration moments.",
+        "use_cases": ["Invitations and entrance signs", "Centerpieces and table cards", "DJ screens and live slideshows", "Family social posts after the party"],
+    },
+    "religious-events": {
+        "title": "Religious Event Photo Sharing QR Code | Private Family Album",
+        "description": "Collect baptism, confirmation, first communion and church celebration photos in a private QR album guests can use without an app.",
+        "anchor": "religious event photo sharing QR code",
+        "intent": "Religious events need a respectful upload flow that keeps family memories private and easy to organize afterward.",
+        "use_cases": ["Baptisms and confirmations", "First communions", "Church community events", "Family receptions"],
+    },
+    "farewell-parties": {
+        "title": "Farewell Party Photo Sharing QR Code | Collect Photos & Messages",
+        "description": "Use a farewell party QR album to collect guest photos, videos and goodbye messages from any phone browser. Keep every memory together and export the archive.",
+        "anchor": "farewell party photo sharing QR code",
+        "intent": "Farewell parties benefit from prompts that invite group photos, short videos, speeches and goodbye messages.",
+        "use_cases": ["Memory walls", "Group dinner tables", "Projector screens", "Post-party recap links"],
+    },
+    "group-trips": {
+        "title": "Group Trip Photo Sharing QR Code | Shared Travel Photo Album",
+        "description": "Collect group trip photos and videos with one QR code everyone can use without an app. Build a shared travel album and download the full archive.",
+        "anchor": "group trip photo sharing QR code",
+        "intent": "Group trips create photos across many phones, so the QR album should travel with the itinerary and recap messages.",
+        "use_cases": ["Trip itineraries", "Welcome packets", "Tour bus screens", "Hotel or group chat messages"],
+    },
+}
 
 FAQ_HOME = [
     (
@@ -217,6 +319,10 @@ def img(src: str, alt: str, css_class: str = "", eager: bool = False) -> str:
         f'alt="{escape(alt)}"',
         'decoding="async"',
     ]
+    if src in IMAGE_DIMENSIONS:
+        width, height = IMAGE_DIMENSIONS[src]
+        attrs.append(f'width="{width}"')
+        attrs.append(f'height="{height}"')
     if eager:
         attrs.append('loading="eager"')
         attrs.append('fetchpriority="high"')
@@ -225,6 +331,10 @@ def img(src: str, alt: str, css_class: str = "", eager: bool = False) -> str:
     if css_class:
         attrs.append(f'class="{escape(css_class)}"')
     return f"<img {' '.join(attrs)}>"
+
+
+def event_seo(event):
+    return EVENT_SEO[event["slug"]]
 
 
 def absolute(path: str) -> str:
@@ -350,7 +460,7 @@ def render_breadcrumbs(items):
 """
 
 
-def head(title: str, description: str, canonical: str, image_path: str, schema_nodes: list[dict]) -> str:
+def head(title: str, description: str, canonical: str, image_path: str, schema_nodes: list[dict], robots: str = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1") -> str:
     graph = {"@context": "https://schema.org", "@graph": site_schema() + schema_nodes}
     return f"""<!doctype html>
 <html lang="en">
@@ -359,7 +469,7 @@ def head(title: str, description: str, canonical: str, image_path: str, schema_n
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{escape(title)}</title>
   <meta name="description" content="{escape(description)}">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="robots" content="{escape(robots)}">
   <meta name="author" content="MyPhotoQR">
   <meta name="theme-color" content="#ffffff">
   <link rel="canonical" href="{escape(absolute(canonical))}">
@@ -447,9 +557,9 @@ def footer():
 """
 
 
-def page(title, description, canonical, image_path, body, schema_nodes, body_class=""):
+def page(title, description, canonical, image_path, body, schema_nodes, body_class="", robots="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"):
     return (
-        head(title, description, canonical, image_path, schema_nodes)
+        head(title, description, canonical, image_path, schema_nodes, robots)
         + f"""
 <body{f' class="{body_class}"' if body_class else ''}>
 {nav()}
@@ -465,12 +575,13 @@ def page(title, description, canonical, image_path, body, schema_nodes, body_cla
 def event_cards():
     cards = []
     for event in EVENTS:
+        seo = event_seo(event)
         cards.append(
             f"""
 <article>
-  <h3><a href="{event["slug"]}.html">{event["label"]}</a></h3>
-  <p>{escape(event["description"])}</p>
-  <a class="text-link" href="{event["slug"]}.html">See {event["label"].lower()} page</a>
+  <h3><a href="{event["slug"]}.html">{escape(seo["anchor"])}</a></h3>
+  <p>{escape(seo["description"])}</p>
+  <a class="text-link" href="{event["slug"]}.html">Collect {escape(event["event_name"])} photos</a>
 </article>
 """
         )
@@ -567,7 +678,7 @@ home_body = f"""
 """
 
 
-def informational_page(title, description, canonical, image_path, hero_eyebrow, hero_heading, hero_copy, sections, faq_items, about):
+def informational_page(title, description, canonical, image_path, hero_eyebrow, hero_heading, hero_copy, sections, faq_items, about, extra_schema=None):
     body = render_breadcrumbs([("Home", "/"), (hero_heading, absolute(canonical))])
     body += f"""
 <section class="page-hero section-pad center">
@@ -590,6 +701,8 @@ def informational_page(title, description, canonical, image_path, hero_eyebrow, 
         breadcrumb_schema([("Home", f"{SITE_URL}/"), (hero_heading, absolute(canonical))]),
         faq_schema(faq_items),
     ]
+    if extra_schema:
+        schema.extend(extra_schema)
     return page(title, description, canonical, image_path, body, schema)
 
 
@@ -631,6 +744,19 @@ how_sections = [
     <article><h3>Place the QR early</h3><p>Start at the entrance or welcome area so guests see it before they settle in.</p></article>
     <article><h3>Repeat the placement</h3><p>Use tables, screens and printed signs to keep the upload path visible throughout the event.</p></article>
     <article><h3>Prompt during key moments</h3><p>Ask the DJ, MC or host to remind guests to upload during speeches, dances or group photos.</p></article>
+  </div>
+</section>
+""",
+    """
+<section class="section-pad center">
+  <p class="eyebrow">Event timeline</p>
+  <h2>What to do before, during and after the event</h2>
+  <p class="section-lead">A QR photo album works best when the upload flow is prepared early, visible during the event and exported soon after guests finish sharing.</p>
+  <div class="benefit-grid">
+    <article><h3>Before the event</h3><p>Create the album, test the QR code on a phone, choose moderation settings and place the QR on signs, invitations or table cards.</p></article>
+    <article><h3>During the event</h3><p>Keep the QR visible, remind guests during high-energy moments and use the live gallery or slideshow for approved uploads.</p></article>
+    <article><h3>After the event</h3><p>Review the final gallery, hide anything you do not want to keep public and download the complete ZIP archive.</p></article>
+    <article><h3>For guests</h3><p>Guests scan, tap upload and add photos or videos directly from their browser without installing an app or creating an account.</p></article>
   </div>
 </section>
 """,
@@ -768,8 +894,9 @@ events_hub_sections = [
 
 
 def event_page(event):
-    title = f'{event["label"]} QR Album | MyPhotoQR Event Photo Sharing'
-    description = event["description"]
+    seo = event_seo(event)
+    title = seo["title"]
+    description = seo["description"]
     canonical = f'{event["slug"]}.html'
     trail = [
         ("Home", f"{SITE_URL}/"),
@@ -792,9 +919,10 @@ def event_page(event):
     ]
     related = [other for other in EVENTS if other["slug"] != event["slug"]][:4]
     related_cards = "".join(
-        f'<article><h3><a href="{other["slug"]}.html">{other["label"]}</a></h3><p>{escape(other["description"])}</p></article>'
+        f'<article><h3><a href="{other["slug"]}.html">{escape(event_seo(other)["anchor"])}</a></h3><p>{escape(event_seo(other)["description"])}</p></article>'
         for other in related
     )
+    use_case_items = "".join(f"<li>{escape(item)}</li>" for item in seo["use_cases"])
     body = render_breadcrumbs([("Home", "/"), ("Events", "events.html"), (event["label"], absolute(canonical))])
     body += f"""
 <section class="page-hero section-pad center">
@@ -813,7 +941,7 @@ def event_page(event):
 
 <section class="section-pad compact center">
   <h2>Why MyPhotoQR works well for {escape(event["label"].lower())}</h2>
-  <p class="section-lead">Guests already have their phones out. A simple QR code gives them a frictionless way to upload photos and videos before those moments disappear into private chats.</p>
+  <p class="section-lead">{escape(seo["intent"])}</p>
   <div class="benefit-grid">
     <article><h3>Simple guest experience</h3><p>Scan the QR, open the browser, upload. No app store or account creation slows guests down.</p></article>
     <article><h3>Better media collection</h3><p>Capture candid angles, guest perspectives and spontaneous moments you would never receive later.</p></article>
@@ -822,12 +950,26 @@ def event_page(event):
   </div>
 </section>
 
+<section class="split section-pad">
+  <div>
+    <p class="eyebrow">Use cases</p>
+    <h2>Best ways to use a {escape(seo["anchor"])}</h2>
+    <p>Make the upload path match the actual flow of the event. The more naturally guests see the QR code, the more complete your final album becomes.</p>
+  </div>
+  <div class="include-panel">
+    <h3>Recommended placements and moments</h3>
+    <ul class="check-list compact-list">
+      {use_case_items}
+    </ul>
+  </div>
+</section>
+
 <section class="split section-pad alt">
   <div>
     <p class="eyebrow">Best placement ideas</p>
     <h2>Where to put the QR code for higher participation</h2>
     <p>{escape(event["placements"])}</p>
-    <a class="text-link" href="features.html">Explore features</a>
+    <a class="text-link" href="features.html">Explore QR album features</a>
   </div>
   <div class="usecase-steps">
     <div class="usecase-step">
@@ -879,13 +1021,13 @@ def event_page(event):
 </section>
 
 <section class="cta-panel section-pad">
-  <h2>Ready to collect {escape(event["label"].lower())} memories?</h2>
+  <h2>Ready to collect {escape(event["event_name"])} memories?</h2>
   <p>Create the QR album before the event so guests have a simple, visible way to upload from the first minute.</p>
   <a class="btn primary" href="https://app.myphotoqr.com/create">Create album</a>
 </section>
 """
     schema = [
-        webpage_schema(title, description, canonical, event["image"], [event["label"], f'{event["label"]} photo sharing', "QR album"]),
+        webpage_schema(title, description, canonical, event["image"], [event["label"], f'{event["label"]} photo sharing', "QR photo sharing code", "QR album"]),
         breadcrumb_schema(trail),
         faq_schema(faq_items),
     ]
@@ -950,8 +1092,8 @@ features = informational_page(
 )
 
 pricing = informational_page(
-    "MyPhotoQR Pricing | One-Time $19.99 QR Album for One Event",
-    "Create one QR album for one event with a one-time $19.99 payment. Includes QR links, guest uploads, live gallery, moderation, slideshow, ZIP export and one year of storage.",
+    "QR Photo Album Pricing | $19.99 One-Time Event Photo Sharing",
+    "Create a QR photo album for one event for $19.99. Guests upload photos and videos with no app, and you can download everything after the event.",
     "pricing.html",
     "img/feature-export.jpg",
     "One event. One payment.",
@@ -960,6 +1102,26 @@ pricing = informational_page(
     pricing_sections,
     FAQ_PRICING,
     ["MyPhotoQR pricing", "One-time event album", "QR photo sharing cost"],
+    extra_schema=[
+        {
+            "@type": "Product",
+            "@id": f"{SITE_URL}/pricing.html#product",
+            "name": "MyPhotoQR QR Photo Album",
+            "description": "A one-time QR photo album for event guest photo and video uploads.",
+            "brand": {
+                "@type": "Brand",
+                "name": "MyPhotoQR",
+            },
+            "image": absolute("img/feature-export.jpg"),
+            "offers": {
+                "@type": "Offer",
+                "price": "19.99",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock",
+                "url": f"{SITE_URL}/pricing.html",
+            },
+        }
+    ],
 )
 
 support = informational_page(
@@ -973,6 +1135,226 @@ support = informational_page(
     support_sections,
     FAQ_SUPPORT,
     ["QR album support", "Event gallery help", "Guest upload troubleshooting"],
+)
+
+events_hub = informational_page(
+    "Events QR Album Pages | MyPhotoQR Use Cases for Weddings, Parties and Trips",
+    "Explore QR album pages for weddings, birthdays, graduations, corporate events, quinceañeras, baby showers, group trips and more.",
+    "events.html",
+    "img/event-collage.jpg",
+    "Use cases and landing pages",
+    "QR album pages for every type of event",
+    "Each event page explains how MyPhotoQR fits a specific celebration or gathering, with setup ideas, placement tips and answers to common questions.",
+    events_hub_sections,
+    [
+        (
+            "Why does MyPhotoQR have separate pages for different event types?",
+            "Because guests, hosts and searchers often have different needs depending on the event. Separate pages let us explain those differences clearly.",
+        ),
+        (
+            "Can the same MyPhotoQR product work for all these event types?",
+            "Yes. The same core product works across many event types, but the best setup and messaging can vary based on the occasion.",
+        ),
+    ],
+    ["Event QR album use cases", "Wedding photo sharing", "Corporate event photo sharing"],
+)
+
+
+INTENT_PAGES = [
+    {
+        "slug": "wedding-photo-sharing-qr-code",
+        "title": "Wedding Photo Sharing QR Code | No-App Guest Uploads",
+        "description": "Create a wedding photo sharing QR code so guests can upload photos and videos from any phone browser. Collect candid guest photos in one private album.",
+        "heading": "Wedding photo sharing QR code for guest uploads",
+        "eyebrow": "Wedding QR photo sharing",
+        "copy": "Use one QR code at the ceremony, reception and after-party so guests can upload wedding photos without downloading an app.",
+        "image": "img/wedding-slideshow.jpg",
+        "problem": "Wedding photos often stay trapped in guest phones, group chats and social apps. A dedicated QR upload page gives everyone one clear place to share.",
+        "best_for": ["Welcome signs near the ceremony entrance", "Reception table cards and bar signs", "Photo booth backdrops", "Post-wedding thank-you messages"],
+        "links": [("QR photo album for weddings", "weddings.html"), ("QR photo album pricing", "pricing.html"), ("How QR photo sharing works", "how-it-works.html")],
+    },
+    {
+        "slug": "qr-code-for-wedding-photos",
+        "title": "QR Code for Wedding Photos | Collect Guest Photos Online",
+        "description": "Make a QR code for wedding photos and let guests upload from their phone browser. Build one live wedding album with moderation and ZIP export.",
+        "heading": "QR code for wedding photos",
+        "eyebrow": "Collect wedding guest photos",
+        "copy": "Give guests a simple scan-to-upload path for ceremony moments, reception candids, dance-floor videos and family photos.",
+        "image": "img/wedding-slideshow.jpg",
+        "problem": "The best wedding photos are often taken by guests, but asking for them later is slow and incomplete. The QR code keeps collection active while the event is happening.",
+        "best_for": ["Ceremony programs", "Seating charts", "Cocktail napkin signs", "DJ screen reminders"],
+        "links": [("Wedding photo sharing QR code", "wedding-photo-sharing-qr-code.html"), ("Wedding QR album page", "weddings.html"), ("Event photo sharing features", "features.html")],
+    },
+    {
+        "slug": "collect-wedding-guest-photos",
+        "title": "Collect Wedding Guest Photos | QR Upload Album with No App",
+        "description": "Collect wedding guest photos with one QR upload album. Guests scan, upload from the browser and help you build a complete wedding gallery.",
+        "heading": "Collect wedding guest photos in one QR album",
+        "eyebrow": "No app for guests",
+        "copy": "Make it easy for guests to contribute candid photos and short videos before memories get lost in private messages.",
+        "image": "img/event-collage.jpg",
+        "problem": "After the wedding, hosts usually have to chase guests across texts, AirDrop, email and social apps. MyPhotoQR turns that into one album link.",
+        "best_for": ["Candid table photos", "Guest selfies", "Dance-floor videos", "Family group shots"],
+        "links": [("QR code for wedding photos", "qr-code-for-wedding-photos.html"), ("Wedding QR album", "weddings.html"), ("Buy one QR album", "pricing.html")],
+    },
+    {
+        "slug": "event-photo-sharing-qr-code",
+        "title": "Event Photo Sharing QR Code | Collect Guest Photos & Videos",
+        "description": "Create an event photo sharing QR code for weddings, parties, graduations, corporate events and trips. Guests upload with no app and you export the archive.",
+        "heading": "Event photo sharing QR code for any gathering",
+        "eyebrow": "One upload link for guests",
+        "copy": "Use one QR code to collect event photos and videos from guests, attendees, family, friends or coworkers.",
+        "image": "img/event-collage.jpg",
+        "problem": "Most events generate photos across dozens of phones. A QR photo album creates one shared upload destination and one clean archive.",
+        "best_for": ["Weddings and birthdays", "Graduations and baby showers", "Corporate events and activations", "Group trips and family gatherings"],
+        "links": [("All QR album event pages", "events.html"), ("No-app event photo sharing", "no-app-photo-sharing-for-events.html"), ("QR upload for events", "qr-photo-upload-for-events.html")],
+    },
+    {
+        "slug": "no-app-photo-sharing-for-events",
+        "title": "No-App Photo Sharing for Events | Browser QR Upload Album",
+        "description": "Let guests share event photos without downloading an app. MyPhotoQR uses one QR code and a browser upload page for photos, videos and memories.",
+        "heading": "No-app photo sharing for events",
+        "eyebrow": "Browser-based uploads",
+        "copy": "Guests scan a QR code, open the upload page and add photos or videos from the browser on iPhone, Android, tablet or desktop.",
+        "image": "img/feature-upload.jpg",
+        "problem": "App downloads reduce participation because guests do not want accounts, permissions or setup steps during an event.",
+        "best_for": ["Mixed-age guest lists", "Venues with limited time for instructions", "Events where people use different devices", "Hosts who want fewer support questions"],
+        "links": [("How MyPhotoQR works", "how-it-works.html"), ("Event photo sharing QR code", "event-photo-sharing-qr-code.html"), ("QR album features", "features.html")],
+    },
+    {
+        "slug": "qr-photo-upload-for-events",
+        "title": "QR Photo Upload for Events | Guest Uploads from Any Phone",
+        "description": "Set up QR photo upload for events so guests can scan, upload and contribute photos or videos to one private event gallery.",
+        "heading": "QR photo upload for events",
+        "eyebrow": "Scan, upload, collect",
+        "copy": "Turn signs, table cards, slides and messages into upload prompts that feed one private event gallery.",
+        "image": "img/scanning.jpg",
+        "problem": "Guests will share more when the upload path is visible, fast and repeated at the right moments.",
+        "best_for": ["Entrance signs", "Table cards", "Projection screens", "Follow-up texts and emails"],
+        "links": [("Event photo sharing QR code", "event-photo-sharing-qr-code.html"), ("No-app photo sharing", "no-app-photo-sharing-for-events.html"), ("Simple pricing", "pricing.html")],
+    },
+    {
+        "slug": "live-event-photo-slideshow",
+        "title": "Live Event Photo Slideshow | Show Guest Uploads from a QR Album",
+        "description": "Create a live event photo slideshow from guest uploads. Use MyPhotoQR to collect photos by QR code, moderate uploads and display approved moments.",
+        "heading": "Live event photo slideshow from guest uploads",
+        "eyebrow": "Gallery and slideshow",
+        "copy": "Collect photos by QR code and turn approved guest uploads into a live gallery or slideshow for a TV, projector or venue screen.",
+        "image": "img/feature-slideshow.jpg",
+        "problem": "A live slideshow is strongest when uploads are easy for guests and the host can control what appears on screen.",
+        "best_for": ["Wedding receptions", "Graduation parties", "Corporate event screens", "Birthday and anniversary celebrations"],
+        "links": [("QR album features", "features.html"), ("Event photo sharing QR code", "event-photo-sharing-qr-code.html"), ("How the upload flow works", "how-it-works.html")],
+    },
+]
+
+
+def intent_landing_cards():
+    return "".join(
+        f"""
+<article>
+  <h3><a href="{page_data["slug"]}.html">{escape(page_data["heading"])}</a></h3>
+  <p>{escape(page_data["description"])}</p>
+  <a class="text-link" href="{page_data["slug"]}.html">Read the guide</a>
+</article>
+"""
+        for page_data in INTENT_PAGES
+    )
+
+
+def intent_page(page_data):
+    best_for = "".join(f"<li>{escape(item)}</li>" for item in page_data["best_for"])
+    related = "".join(
+        f'<a href="{escape(href)}">{escape(label)}</a>' for label, href in page_data["links"]
+    )
+    faq_items = [
+        (
+            f'Can guests use this {page_data["heading"].lower()} without an app?',
+            "Yes. Guests scan the QR code and upload from a browser on iPhone, Android, tablet or desktop.",
+        ),
+        (
+            "Can the host review uploads?",
+            "Yes. MyPhotoQR supports moderation so hosts can review, hide or feature uploads before using the gallery or slideshow.",
+        ),
+        (
+            "Can I download the photos after the event?",
+            "Yes. The album can be exported as a ZIP archive after the event.",
+        ),
+    ]
+    body = render_breadcrumbs([("Home", "/"), ("Guides", "events.html"), (page_data["heading"], f'{page_data["slug"]}.html')])
+    body += f"""
+<section class="page-hero section-pad center">
+  <p class="eyebrow">{escape(page_data["eyebrow"])}</p>
+  <h1>{escape(page_data["heading"])}</h1>
+  <p>{escape(page_data["copy"])}</p>
+  <div class="hero-actions">
+    <a class="btn primary" href="https://app.myphotoqr.com/create">Create album</a>
+    <a class="btn secondary" href="pricing.html">See pricing</a>
+  </div>
+  <div class="hero-visual event-hero-visual">
+    {img(page_data["image"], page_data["heading"], eager=True)}
+  </div>
+</section>
+
+<section class="split section-pad">
+  <div>
+    <p class="eyebrow">Search intent</p>
+    <h2>Why this QR album page exists</h2>
+    <p>{escape(page_data["problem"])}</p>
+  </div>
+  <div class="include-panel">
+    <h3>Best places to use it</h3>
+    <ul class="check-list compact-list">
+      {best_for}
+    </ul>
+  </div>
+</section>
+
+<section class="section-pad center alt">
+  <p class="eyebrow">Workflow</p>
+  <h2>From QR scan to final archive</h2>
+  <div class="benefit-grid">
+    <article><h3>Create</h3><p>Set up one event album and personalize the upload page before guests arrive.</p></article>
+    <article><h3>Share</h3><p>Place the QR code on signs, tables, screens, invitations or messages.</p></article>
+    <article><h3>Collect</h3><p>Guests upload photos and videos from their browser while the event is happening.</p></article>
+    <article><h3>Export</h3><p>Review the gallery, use the slideshow and download the full ZIP archive afterward.</p></article>
+  </div>
+</section>
+
+<section class="section-pad center">
+  <p class="eyebrow">Internal links</p>
+  <h2>Related MyPhotoQR pages</h2>
+  <div class="footer-links intent-links">
+    {related}
+  </div>
+</section>
+
+{render_faq(faq_items, f'{page_data["heading"]} FAQ')}
+
+<section class="cta-panel section-pad">
+  <h2>Create one QR album before the event starts</h2>
+  <p>Give every guest one simple upload path and keep the final gallery organized from the first scan.</p>
+  <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a>
+</section>
+"""
+    schema = [
+        webpage_schema(page_data["title"], page_data["description"], f'{page_data["slug"]}.html', page_data["image"], [page_data["heading"], "Event photo sharing", "QR photo upload"]),
+        breadcrumb_schema([("Home", f"{SITE_URL}/"), ("Guides", f"{SITE_URL}/events.html"), (page_data["heading"], absolute(f'{page_data["slug"]}.html'))]),
+        faq_schema(faq_items),
+    ]
+    return page(page_data["title"], page_data["description"], f'{page_data["slug"]}.html', page_data["image"], body, schema)
+
+
+events_hub_sections.append(
+    f"""
+<section class="section-pad center">
+  <p class="eyebrow">Search guides</p>
+  <h2>Pages built around high-intent searches</h2>
+  <p class="section-lead">These focused guides answer the exact questions people search before choosing a QR photo album for an event.</p>
+  <div class="benefit-grid link-grid">
+    {intent_landing_cards()}
+  </div>
+</section>
+"""
 )
 
 events_hub = informational_page(
@@ -1013,7 +1395,7 @@ def legal_page(title, description, canonical, body_copy):
         webpage_schema(title, description, canonical, "img/og-myphotoqr.jpg", [title.split("|")[0].strip(), "MyPhotoQR policies"]),
         breadcrumb_schema([("Home", f"{SITE_URL}/"), (title.split("|")[0].strip(), absolute(canonical))]),
     ]
-    return page(title, description, canonical, "img/og-myphotoqr.jpg", body, schema)
+    return page(title, description, canonical, "img/og-myphotoqr.jpg", body, schema, robots="noindex, follow")
 
 
 privacy = legal_page(
@@ -1064,9 +1446,12 @@ FILES = {
 for event in EVENTS:
     FILES[f'{event["slug"]}.html'] = event_page(event)
 
+for page_data in INTENT_PAGES:
+    FILES[f'{page_data["slug"]}.html'] = intent_page(page_data)
+
 
 CSS = r"""
-:root{--text:#0b0d12;--muted:#666b76;--line:#eceef3;--soft:#f8f7f5;--cream:#fff8ed;--blue:#eff8ff;--accent:#ff4f7b;--radius:34px;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:#fff}img{max-width:100%;display:block}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(44px,7vw,82px);line-height:.96;letter-spacing:-.07em;margin-bottom:22px}h2{font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.06em;margin-bottom:18px}h3{font-size:22px;letter-spacing:-.04em;margin-bottom:10px}p{color:var(--muted);line-height:1.68;font-size:17px}.site-header{height:82px;display:flex;align-items:center;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px;position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,13,18,.06);z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em}.brand-logo{width:42px;height:42px;object-fit:cover}.nav{display:flex;gap:30px;margin:0 auto;color:#30323a;font-size:15px;align-items:center}.nav a:hover,.nav-dropdown-toggle:hover{color:#000}.nav-cta,.btn{border-radius:999px;padding:14px 22px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}.nav-cta,.btn.primary{background:#000;color:#fff}.btn.secondary{border:1px solid var(--line);background:#fff;color:#111}.btn.full{width:100%}.menu-toggle{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}.nav-dropdown{position:relative;display:flex;align-items:center}.nav-dropdown-toggle{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;font-size:15px}.nav-dropdown-menu{display:none;position:absolute;top:100%;left:-16px;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px 10px 10px;box-shadow:0 18px 40px rgba(11,13,18,.08);z-index:30}.nav-dropdown-menu a{display:block;padding:10px 14px;border-radius:14px;font-weight:800}.nav-dropdown-menu a:hover{background:var(--soft)}.nav-dropdown.open .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown:hover .nav-dropdown-menu{display:block}.section-pad{padding:80px 28px;max-width:var(--max);margin:0 auto}.breadcrumbs{padding-top:26px;padding-bottom:0;display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:#5b6170}.breadcrumbs a{font-weight:700}.breadcrumbs-sep{color:#a6abb4}.hero{min-height:760px;display:grid;grid-template-columns:1fr;place-items:center;justify-items:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 5% 24%,#fff0b8 0,transparent 22%),radial-gradient(circle at 92% 60%,#ffe3ce 0,transparent 22%),linear-gradient(#fff,#fffdfa);max-width:none}.hero-copy{width:100%;max-width:760px;margin:20px auto 0;padding-inline:20px;display:grid;justify-items:center}.hero-copy>p:not(.eyebrow):not(.microcopy){max-width:30ch;font-size:19px}.hero-actions{display:flex;gap:12px;justify-content:center;margin:28px 0 12px;flex-wrap:wrap}.microcopy{font-size:14px!important}.hero-visual{width:min(700px,96vw);margin-inline:auto}.hero-visual img,.event-hero-visual img{border-radius:42px}.hero-float-media{position:absolute;width:170px;height:170px;object-fit:cover;border-radius:999px;border:1px solid var(--line);box-shadow:0 18px 40px rgba(11,13,18,.1);background:#fff}.hero-float-left{left:7%;top:38%;transform:rotate(-8deg)}.hero-float-right{right:9%;top:47%;transform:rotate(7deg)}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:900;margin:0 0 16px}.center{text-align:center}.compact{padding-top:60px}.section-lead{max-width:720px;margin:0 auto 44px}.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:left}.benefit-grid article,.support-grid article,.price-card,.include-panel,.timeline article,.legal,.faq details{border:1px solid var(--line);border-radius:var(--radius);padding:30px;background:#fff}.link-grid article{display:flex;flex-direction:column;justify-content:space-between}.alt{background:linear-gradient(110deg,var(--cream),#fff 50%,var(--blue));max-width:none}.split{display:grid;grid-template-columns:minmax(0,560px) minmax(0,560px);justify-content:center;gap:70px;align-items:center}.image-board,.usecase-steps{display:grid;gap:18px}.image-board img{border-radius:34px}.usecase-step{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;border:1px solid var(--line);border-radius:28px;padding:16px 18px;background:#fff}.usecase-step img{width:120px;height:120px;border-radius:24px;object-fit:cover}.usecase-step p{margin:0}.text-link{font-weight:900;border-bottom:2px solid #000;width:max-content}.pill-row,.use-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:940px;margin:32px auto 0}.pill-row span,.use-grid span{border:1px solid var(--line);border-radius:999px;padding:14px 18px;font-weight:800;background:#fff}.cta-panel{text-align:center;background:linear-gradient(120deg,#fff7e8,#fff,#f4f8ff);border-radius:46px;margin-bottom:80px}.cta-panel p{max-width:650px;margin:0 auto 28px}.page-hero{padding-top:40px;padding-bottom:42px}.page-hero p:not(.eyebrow){max-width:760px;margin:0 auto}.event-hero-visual{max-width:860px;margin:26px auto 0}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.feature-list{display:grid;gap:26px}.feature-list article{display:grid;grid-template-columns:260px 1fr;gap:38px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:26px}.feature-list img{height:180px;width:260px;object-fit:cover;border-radius:28px}.pricing-wrap{display:grid;grid-template-columns:minmax(320px,520px) 1fr;gap:38px;align-items:start}.price-card h2{font-size:72px}.price-note{margin-top:-10px}.check-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}.compact-list{margin-top:20px}.check-list li{padding-left:30px;position:relative;color:#30323a}.check-list li:before{content:"✓";position:absolute;left:0;top:0;font-weight:900;color:#03a57a}.mini-steps{display:grid;gap:12px;margin-top:26px}.mini-steps span{padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:18px;font-weight:800}.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.single-grid{grid-template-columns:1fr}.faq{max-width:920px}.faq h2{text-align:center}.faq details{padding:24px 30px}.faq summary{font-weight:900;font-size:20px;cursor:pointer;letter-spacing:-.03em}.faq p{margin:12px 0 0}.legal{max-width:860px}.footer{border-top:1px solid var(--line);padding:46px 28px;max-width:1280px;margin:0 auto;display:grid;gap:24px}.footer p{max-width:620px;font-size:15px}.footer-links{display:flex;flex-wrap:wrap;gap:18px;font-weight:800}.footer-events a{font-weight:700}.copyright{font-size:13px!important;color:#8a8f98}.flowbar{max-width:980px;margin:0 auto;position:relative;--flowpad:80px}.flowbar-track{position:absolute;top:calc(var(--flowpad) + 62px);left:6%;right:6%;height:10px;border-radius:999px;background:linear-gradient(90deg,#ffe08f,#ff66b7,#a98bff,#8fd0ff);opacity:.95;z-index:1}.flowbar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;text-align:center;z-index:2}.flowbar-icon{width:124px;height:124px;border:4px solid #050505;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#fff;box-shadow:0 18px 34px rgba(11,13,18,.1);position:relative;z-index:2}.flowbar-icon img{width:44px;height:44px;object-fit:contain}.events-page .hero-copy{max-width:820px}@media(max-width:900px){.site-header{height:auto;min-height:72px;flex-wrap:wrap}.menu-toggle{display:block;margin-left:auto}.nav,.nav-cta{display:none}.nav.open{display:flex;order:5;width:100%;flex-direction:column;gap:12px;padding:18px 0}.nav-dropdown{width:100%;flex-direction:column;align-items:flex-start}.nav-dropdown-toggle{width:100%;text-align:left;padding:14px 0;font-weight:800}.nav-dropdown-menu{position:static;box-shadow:none;border:0;padding:0;margin:0 0 8px;display:none;min-width:auto;width:100%}.nav-dropdown.open .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{display:block}.nav-dropdown-menu a{padding:10px 0;border-radius:0;font-weight:700}.nav-dropdown-menu a:hover{background:transparent}.section-pad{padding:58px 20px}.hero{min-height:auto;padding-top:42px}.hero-actions{flex-direction:column}.hero-float-media{display:none}.hero-visual{width:min(320px,84vw)}.benefit-grid,.timeline,.support-grid,.pricing-wrap,.split,.feature-list article{grid-template-columns:1fr}.feature-list img{width:100%;height:auto}.usecase-step{grid-template-columns:1fr}.usecase-step img{width:100%;height:auto}h1{font-size:46px}.page-hero{padding-top:24px}.cta-panel{border-radius:32px;margin-left:20px;margin-right:20px}.flowbar{--flowpad:58px}.flowbar-track{display:none}.flowbar-grid{grid-template-columns:1fr;gap:26px}.faq details{padding:22px}}"""
+:root{--text:#0b0d12;--muted:#666b76;--line:#eceef3;--soft:#f8f7f5;--cream:#fff8ed;--blue:#eff8ff;--accent:#ff4f7b;--radius:34px;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:#fff}img{max-width:100%;display:block}a{color:inherit;text-decoration:none}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(44px,7vw,82px);line-height:.96;letter-spacing:-.07em;margin-bottom:22px}h2{font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-.06em;margin-bottom:18px}h3{font-size:22px;letter-spacing:-.04em;margin-bottom:10px}p{color:var(--muted);line-height:1.68;font-size:17px}.site-header{height:82px;display:flex;align-items:center;gap:24px;max-width:1280px;margin:0 auto;padding:0 28px;position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 30px rgba(11,13,18,.06);z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em}.brand-logo{width:42px;height:42px;object-fit:cover}.nav{display:flex;gap:30px;margin:0 auto;color:#30323a;font-size:15px;align-items:center}.nav a:hover,.nav-dropdown-toggle:hover{color:#000}.nav-cta,.btn{border-radius:999px;padding:14px 22px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}.nav-cta,.btn.primary{background:#000;color:#fff}.btn.secondary{border:1px solid var(--line);background:#fff;color:#111}.btn.full{width:100%}.menu-toggle{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 12px}.nav-dropdown{position:relative;display:flex;align-items:center}.nav-dropdown-toggle{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer;font-size:15px}.nav-dropdown-menu{display:none;position:absolute;top:100%;left:-16px;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px 10px 10px;box-shadow:0 18px 40px rgba(11,13,18,.08);z-index:30}.nav-dropdown-menu a{display:block;padding:10px 14px;border-radius:14px;font-weight:800}.nav-dropdown-menu a:hover{background:var(--soft)}.nav-dropdown.open .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu,.nav-dropdown:hover .nav-dropdown-menu{display:block}.section-pad{padding:80px 28px;max-width:var(--max);margin:0 auto}.breadcrumbs{padding-top:26px;padding-bottom:0;display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:#5b6170}.breadcrumbs a{font-weight:700}.breadcrumbs-sep{color:#a6abb4}.hero{min-height:760px;display:grid;grid-template-columns:1fr;place-items:center;justify-items:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(circle at 5% 24%,#fff0b8 0,transparent 22%),radial-gradient(circle at 92% 60%,#ffe3ce 0,transparent 22%),linear-gradient(#fff,#fffdfa);max-width:none}.hero-copy{width:100%;max-width:760px;margin:20px auto 0;padding-inline:20px;display:grid;justify-items:center}.hero-copy>p:not(.eyebrow):not(.microcopy){max-width:30ch;font-size:19px}.hero-actions{display:flex;gap:12px;justify-content:center;margin:28px 0 12px;flex-wrap:wrap}.microcopy{font-size:14px!important}.hero-visual{width:min(700px,96vw);margin-inline:auto}.hero-visual img,.event-hero-visual img{border-radius:42px}.hero-float-media{position:absolute;width:170px;height:170px;object-fit:cover;border-radius:999px;border:1px solid var(--line);box-shadow:0 18px 40px rgba(11,13,18,.1);background:#fff}.hero-float-left{left:7%;top:38%;transform:rotate(-8deg)}.hero-float-right{right:9%;top:47%;transform:rotate(7deg)}.eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:900;margin:0 0 16px}.center{text-align:center}.compact{padding-top:60px}.section-lead{max-width:720px;margin:0 auto 44px}.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;text-align:left}.benefit-grid article,.support-grid article,.price-card,.include-panel,.timeline article,.legal,.faq details{border:1px solid var(--line);border-radius:var(--radius);padding:30px;background:#fff}.link-grid article{display:flex;flex-direction:column;justify-content:space-between}.alt{background:linear-gradient(110deg,var(--cream),#fff 50%,var(--blue));max-width:none}.split{display:grid;grid-template-columns:minmax(0,560px) minmax(0,560px);justify-content:center;gap:70px;align-items:center}.image-board,.usecase-steps{display:grid;gap:18px}.image-board img{border-radius:34px}.usecase-step{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;border:1px solid var(--line);border-radius:28px;padding:16px 18px;background:#fff}.usecase-step img{width:120px;height:120px;border-radius:24px;object-fit:cover}.usecase-step p{margin:0}.text-link{font-weight:900;border-bottom:2px solid #000;width:max-content}.pill-row,.use-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:940px;margin:32px auto 0}.pill-row span,.use-grid span{border:1px solid var(--line);border-radius:999px;padding:14px 18px;font-weight:800;background:#fff}.cta-panel{text-align:center;background:linear-gradient(120deg,#fff7e8,#fff,#f4f8ff);border-radius:46px;margin-bottom:80px}.cta-panel p{max-width:650px;margin:0 auto 28px}.page-hero{padding-top:40px;padding-bottom:42px}.page-hero p:not(.eyebrow){max-width:760px;margin:0 auto}.event-hero-visual{max-width:860px;margin:26px auto 0}.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.feature-list{display:grid;gap:26px}.feature-list article{display:grid;grid-template-columns:260px 1fr;gap:38px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:26px}.feature-list img{height:180px;width:260px;object-fit:cover;border-radius:28px}.pricing-wrap{display:grid;grid-template-columns:minmax(320px,520px) 1fr;gap:38px;align-items:start}.price-card h2{font-size:72px}.price-note{margin-top:-10px}.check-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}.compact-list{margin-top:20px}.check-list li{padding-left:30px;position:relative;color:#30323a}.check-list li:before{content:"✓";position:absolute;left:0;top:0;font-weight:900;color:#03a57a}.mini-steps{display:grid;gap:12px;margin-top:26px}.mini-steps span{padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:18px;font-weight:800}.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.single-grid{grid-template-columns:1fr}.faq{max-width:920px}.faq h2{text-align:center}.faq details{padding:24px 30px}.faq summary{font-weight:900;font-size:20px;cursor:pointer;letter-spacing:-.03em}.faq p{margin:12px 0 0}.legal{max-width:860px}.footer{border-top:1px solid var(--line);padding:46px 28px;max-width:1280px;margin:0 auto;display:grid;gap:24px}.footer p{max-width:620px;font-size:15px}.footer-links{display:flex;flex-wrap:wrap;gap:18px;font-weight:800}.footer-events a{font-weight:700}.intent-links{justify-content:center}.copyright{font-size:13px!important;color:#8a8f98}.flowbar{max-width:980px;margin:0 auto;position:relative;--flowpad:80px}.flowbar-track{position:absolute;top:calc(var(--flowpad) + 62px);left:6%;right:6%;height:10px;border-radius:999px;background:linear-gradient(90deg,#ffe08f,#ff66b7,#a98bff,#8fd0ff);opacity:.95;z-index:1}.flowbar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;text-align:center;z-index:2}.flowbar-icon{width:124px;height:124px;border:4px solid #050505;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:#fff;box-shadow:0 18px 34px rgba(11,13,18,.1);position:relative;z-index:2}.flowbar-icon img{width:44px;height:44px;object-fit:contain}.events-page .hero-copy{max-width:820px}@media(max-width:900px){.site-header{height:auto;min-height:72px;flex-wrap:wrap}.menu-toggle{display:block;margin-left:auto}.nav,.nav-cta{display:none}.nav.open{display:flex;order:5;width:100%;flex-direction:column;gap:12px;padding:18px 0}.nav-dropdown{width:100%;flex-direction:column;align-items:flex-start}.nav-dropdown-toggle{width:100%;text-align:left;padding:14px 0;font-weight:800}.nav-dropdown-menu{position:static;box-shadow:none;border:0;padding:0;margin:0 0 8px;display:none;min-width:auto;width:100%}.nav-dropdown.open .nav-dropdown-menu,.nav-dropdown:focus-within .nav-dropdown-menu{display:block}.nav-dropdown-menu a{padding:10px 0;border-radius:0;font-weight:700}.nav-dropdown-menu a:hover{background:transparent}.section-pad{padding:58px 20px}.hero{min-height:auto;padding-top:42px}.hero-actions{flex-direction:column}.hero-float-media{display:none}.hero-visual{width:min(320px,84vw)}.benefit-grid,.timeline,.support-grid,.pricing-wrap,.split,.feature-list article{grid-template-columns:1fr}.feature-list img{width:100%;height:auto}.usecase-step{grid-template-columns:1fr}.usecase-step img{width:100%;height:auto}h1{font-size:46px}.page-hero{padding-top:24px}.cta-panel{border-radius:32px;margin-left:20px;margin-right:20px}.flowbar{--flowpad:58px}.flowbar-track{display:none}.flowbar-grid{grid-template-columns:1fr;gap:26px}.faq details{padding:22px}}"""
 
 
 JS = """const menuButton=document.querySelector('[data-menu-toggle]');const nav=document.querySelector('[data-nav]');if(menuButton&&nav){menuButton.addEventListener('click',()=>nav.classList.toggle('open'));}document.querySelectorAll('[data-dropdown]').forEach(dropdown=>{const button=dropdown.querySelector('.nav-dropdown-toggle');if(!button)return;button.addEventListener('click',()=>{const expanded=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!expanded));dropdown.classList.toggle('open',!expanded);});});"""
@@ -1111,13 +1496,7 @@ sitemap_urls = [
     ("events.html", "monthly", "0.8"),
 ]
 sitemap_urls.extend((f'{event["slug"]}.html', "monthly", "0.75") for event in EVENTS)
-sitemap_urls.extend(
-    [
-        ("privacy.html", "yearly", "0.3"),
-        ("terms.html", "yearly", "0.3"),
-        ("refunds.html", "yearly", "0.3"),
-    ]
-)
+sitemap_urls.extend((f'{page_data["slug"]}.html', "monthly", "0.78") for page_data in INTENT_PAGES)
 
 sitemap_parts = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for loc, changefreq, priority in sitemap_urls:
