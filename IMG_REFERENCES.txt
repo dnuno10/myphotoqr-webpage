@@ -1,16 +1,16 @@
 Replace these referenced images with your final files:
 
-img/logo-myphotoqr.jpg
-img/favicon.png
-img/og-myphotoqr.jpg
-img/home-phone-mockup.jpg
-img/event-collage.jpg
-img/icon-gallery.png
-img/icon-qr.png
-img/icon-upload.png
-img/icon-slideshow.png
-img/icon-download.png
-img/feature-branding.jpg
-img/feature-upload.jpg
-img/feature-slideshow.jpg
-img/feature-export.jpg
+img/logo-myphotoqr.webp
+img/favicon.webp
+img/og-myphotoqr.webp
+img/home-phone-mockup.webp
+img/event-collage.webp
+img/icon-gallery.webp
+img/icon-qr.webp
+img/icon-upload.webp
+img/icon-slideshow.webp
+img/icon-download.webp
+img/feature-branding.webp
+img/feature-upload.webp
+img/feature-slideshow.webp
+img/feature-export.webp
