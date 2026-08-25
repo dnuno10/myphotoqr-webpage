@@ -6,6 +6,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 SITE_URL = "https://www.myphotoqr.com"
 TODAY = date.today().isoformat()
+PRICE = "9.99"
+DISPLAY_PRICE = f"${PRICE}"
 
 
 EVENTS = [
@@ -13,7 +15,7 @@ EVENTS = [
         "slug": "weddings",
         "label": "Weddings",
         "event_name": "wedding",
-        "hero_title": "Wedding photo sharing with one QR album",
+        "hero_title": "Free photo gallery for wedding guests",
         "description": "Collect wedding photos and videos in one private QR album. Guests scan a QR code, upload from their browser, and you get a live gallery, moderation controls, and a final ZIP export.",
         "hero_copy": "Capture ceremony, cocktail hour, and dance-floor moments without chasing guests later. One QR code gives everyone an easy way to share from any phone.",
         "image": "img/wedding-slideshow.webp",
@@ -24,7 +26,7 @@ EVENTS = [
         "slug": "birthdays",
         "label": "Birthdays",
         "event_name": "birthday party",
-        "hero_title": "Birthday photo sharing with one QR album",
+        "hero_title": "Free photo gallery for birthday guests",
         "description": "Collect birthday party photos and videos in one private QR album. Guests scan a QR code, upload from their browser, and you keep everything organized in one gallery.",
         "hero_copy": "From candles to cake, every guest can add photos instantly. MyPhotoQR replaces scattered chats with one clean album and a simple QR flow.",
         "image": "img/feature-slideshow.webp",
@@ -35,7 +37,7 @@ EVENTS = [
         "slug": "graduations",
         "label": "Graduations",
         "event_name": "graduation party",
-        "hero_title": "Graduation photo sharing with one QR album",
+        "hero_title": "Free photo gallery for graduation guests",
         "description": "Collect graduation party photos and videos with a QR code guests can scan from any phone. Build one live album, protect it with optional moderation, and export the full archive later.",
         "hero_copy": "Collect cap toss photos, family snapshots and celebration videos in one place without asking guests to install an app.",
         "image": "img/grad-slideshow.webp",
@@ -46,7 +48,7 @@ EVENTS = [
         "slug": "anniversaries",
         "label": "Anniversaries",
         "event_name": "anniversary celebration",
-        "hero_title": "Anniversary photo sharing with one QR album",
+        "hero_title": "Free photo gallery for anniversary guests",
         "description": "Collect anniversary celebration photos and videos in one QR album guests can use without an app. Keep memories private, feature the best uploads, and download everything afterward.",
         "hero_copy": "Make it easy for family and friends to share toasts, throwback photos and new memories with one QR code and one private event gallery.",
         "image": "img/anniversary-slideshow.webp",
@@ -57,7 +59,7 @@ EVENTS = [
         "slug": "corporate-events",
         "label": "Corporate Events",
         "event_name": "corporate event",
-        "hero_title": "Corporate event photo sharing with one QR album",
+        "hero_title": "Free photo gallery for event attendees",
         "description": "Collect conference, retreat and activation photos in one branded QR album. Attendees upload from their browser while your team reviews, features and exports the best content.",
         "hero_copy": "Use one clean upload flow for staff, guests and attendees. Gather event media, social-ready moments and behind-the-scenes content in real time.",
         "image": "img/corporate-slideshow.webp",
@@ -68,7 +70,7 @@ EVENTS = [
         "slug": "baby-showers",
         "label": "Baby Showers",
         "event_name": "baby shower",
-        "hero_title": "Baby shower photo sharing with one QR album",
+        "hero_title": "Free photo gallery for baby shower guests",
         "description": "Collect baby shower photos, videos and sweet messages in one private QR album. Guests upload from any browser and you keep everything organized for later.",
         "hero_copy": "Share one QR code and collect gift-table photos, family moments and messages without losing anything in text threads.",
         "image": "img/babyshower-slideshow.webp",
@@ -79,7 +81,7 @@ EVENTS = [
         "slug": "quinceaneras",
         "label": "Quinceañeras",
         "event_name": "quinceañera",
-        "hero_title": "Quinceañera photo sharing with one QR album",
+        "hero_title": "Free photo gallery for quinceañera guests",
         "description": "Collect quinceañera photos and videos in one private QR album. Guests scan a QR code, upload instantly, and you can show a live slideshow and export the full gallery after the event.",
         "hero_copy": "Capture dance-floor moments, family portraits and guest videos with one shareable QR code that works on any device.",
         "image": "img/15-slideshow.webp",
@@ -90,7 +92,7 @@ EVENTS = [
         "slug": "religious-events",
         "label": "Religious Events",
         "event_name": "religious event",
-        "hero_title": "Religious event photo sharing with one QR album",
+        "hero_title": "Free photo gallery for family celebrations",
         "description": "Collect church and family celebration photos in one private QR album guests can access without an app. Keep the gallery simple, respectful and easy to share later.",
         "hero_copy": "For baptisms, confirmations, first communions and community celebrations, MyPhotoQR keeps every guest upload in one secure place.",
         "image": "img/religious-slideshow.webp",
@@ -101,7 +103,7 @@ EVENTS = [
         "slug": "farewell-parties",
         "label": "Farewell Parties",
         "event_name": "farewell party",
-        "hero_title": "Farewell party photo sharing with one QR album",
+        "hero_title": "Free photo gallery for farewell parties",
         "description": "Collect farewell party photos, videos and messages in one QR album guests can use from any phone browser. Keep every memory together and export the full archive later.",
         "hero_copy": "Make it easy for everyone to share group photos, speeches and candid goodbye moments in one place before the night ends.",
         "image": "img/farewell-slideshow.webp",
@@ -112,7 +114,7 @@ EVENTS = [
         "slug": "group-trips",
         "label": "Group Trips",
         "event_name": "group trip",
-        "hero_title": "Group trip photo sharing with one QR album",
+        "hero_title": "Free photo gallery for group trips",
         "description": "Collect group trip photos and videos in one QR album everyone can use without an app. Build a live shared gallery and download the full archive after the trip.",
         "hero_copy": "From airports to excursions, MyPhotoQR keeps everyone’s travel photos in one place instead of spread across dozens of chats.",
         "image": "img/trip-slideshow.webp",
@@ -154,70 +156,70 @@ IMAGE_DIMENSIONS = {
 
 EVENT_SEO = {
     "weddings": {
-        "title": "Wedding Photo Sharing QR Code | Collect Guest Photos with MyPhotoQR",
+        "title": "Free Photo Gallery for Wedding Guests | QR Photo Sharing",
         "description": "Create a wedding photo sharing QR code so guests can upload photos and videos with no app. Collect candid guest moments, run a live gallery and download the archive.",
         "anchor": "QR photo album for weddings",
         "intent": "A wedding QR photo album works best when it is visible before the reception starts and easy to scan throughout the night.",
         "use_cases": ["Welcome signs and seating charts", "Cocktail hour and reception tables", "Photo booth backdrops and DJ screens", "Thank-you cards after the wedding"],
     },
     "birthdays": {
-        "title": "Birthday Party Photo Sharing QR Code | MyPhotoQR QR Album",
+        "title": "Free Photo Gallery for Birthdays | QR Guest Uploads",
         "description": "Use a birthday party photo sharing QR code to collect guest photos and videos in one private album. No app required, with live gallery, moderation and ZIP export.",
         "anchor": "birthday party photo sharing QR code",
         "intent": "Birthday parties move quickly, so the QR code should be placed where guests naturally pause, gather and take photos.",
         "use_cases": ["Kids' birthday parties", "Milestone birthdays", "Surprise parties", "Backyard parties and family dinners"],
     },
     "graduations": {
-        "title": "Graduation Photo Sharing QR Code | Collect Guest Photos & Videos",
+        "title": "Free Photo Gallery for Graduations | QR Guest Uploads",
         "description": "Collect graduation photos and videos with one QR code guests can scan from any phone. Build a live album for ceremony moments, family photos and after-party uploads.",
         "anchor": "graduation photo sharing QR code",
         "intent": "Graduation albums need to capture formal moments, family snapshots and the casual celebration that happens afterward.",
         "use_cases": ["Graduation ceremonies", "School and campus events", "Family celebrations", "After-parties and brunches"],
     },
     "anniversaries": {
-        "title": "Anniversary Photo Sharing QR Code | Collect Family Memories",
+        "title": "Free Photo Gallery for Anniversaries | Collect Memories",
         "description": "Create an anniversary photo sharing QR code for family and friends. Collect photos, videos and tribute moments in one private album with no app required.",
         "anchor": "anniversary photo sharing QR code",
         "intent": "Anniversary events often mix old memories with new photos, so the album should invite guests to share both.",
         "use_cases": ["Memory tables", "Dinner menus", "Family slideshow screens", "Post-event family messages"],
     },
     "corporate-events": {
-        "title": "Corporate Event Photo Sharing QR Code | Attendee Upload Album",
+        "title": "Free Photo Gallery for Corporate Events | Attendee Uploads",
         "description": "Collect corporate event, conference and retreat photos with a branded QR upload album. Attendees upload from a browser while your team reviews and exports content.",
         "anchor": "corporate event photo sharing QR code",
         "intent": "Business events need a branded, low-friction upload flow that works for attendees, staff, partners and sponsors.",
         "use_cases": ["Conferences and expos", "Company retreats", "Brand activations", "Team-building events"],
     },
     "baby-showers": {
-        "title": "Baby Shower Photo Sharing QR Code | Collect Guest Photos",
+        "title": "Free Photo Gallery for Baby Showers | Guest Photo Uploads",
         "description": "Create a baby shower photo sharing QR code so guests can upload photos, videos and sweet messages with no app. Keep everything in one private QR album.",
         "anchor": "baby shower photo sharing QR code",
         "intent": "Baby shower albums should make it easy to collect gift moments, family photos and short messages from guests.",
         "use_cases": ["Gift tables and dessert stations", "Welcome signs", "Favor tags", "Thank-you follow-ups"],
     },
     "quinceaneras": {
-        "title": "Quinceañera Photo Sharing QR Code | QR Album for Guest Photos",
+        "title": "Free Photo Gallery for Quinceañeras | QR Guest Uploads",
         "description": "Collect quinceañera guest photos and videos with one QR code. Guests upload without an app, and you can show a live slideshow and download the final album.",
         "anchor": "quinceañera photo sharing QR code",
         "intent": "A quinceañera QR album should support invitations, entrance displays, table cards and live celebration moments.",
         "use_cases": ["Invitations and entrance signs", "Centerpieces and table cards", "DJ screens and live slideshows", "Family social posts after the party"],
     },
     "religious-events": {
-        "title": "Religious Event Photo Sharing QR Code | Private Family Album",
+        "title": "Free Photo Gallery for Religious Events | Private Album",
         "description": "Collect baptism, confirmation, first communion and church celebration photos in a private QR album guests can use without an app.",
         "anchor": "religious event photo sharing QR code",
         "intent": "Religious events need a respectful upload flow that keeps family memories private and easy to organize afterward.",
         "use_cases": ["Baptisms and confirmations", "First communions", "Church community events", "Family receptions"],
     },
     "farewell-parties": {
-        "title": "Farewell Party Photo Sharing QR Code | Collect Photos & Messages",
+        "title": "Free Photo Gallery for Farewell Parties | Photos & Messages",
         "description": "Use a farewell party QR album to collect guest photos, videos and goodbye messages from any phone browser. Keep every memory together and export the archive.",
         "anchor": "farewell party photo sharing QR code",
         "intent": "Farewell parties benefit from prompts that invite group photos, short videos, speeches and goodbye messages.",
         "use_cases": ["Memory walls", "Group dinner tables", "Projector screens", "Post-party recap links"],
     },
     "group-trips": {
-        "title": "Group Trip Photo Sharing QR Code | Shared Travel Photo Album",
+        "title": "Free Photo Gallery for Group Trips | Shared Travel Album",
         "description": "Collect group trip photos and videos with one QR code everyone can use without an app. Build a shared travel album and download the full archive.",
         "anchor": "group trip photo sharing QR code",
         "intent": "Group trips create photos across many phones, so the QR album should travel with the itinerary and recap messages.",
@@ -405,7 +407,7 @@ def site_schema():
             "operatingSystem": "Web",
             "offers": {
                 "@type": "Offer",
-                "price": "19.99",
+                "price": PRICE,
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/InStock",
                 "url": "https://app.myphotoqr.com/create",
@@ -594,7 +596,7 @@ home_body = f"""
   {img("img/scanning.webp", "Guest scanning a QR code to upload event photos", "hero-float-media hero-float-right")}
   <div class="hero-copy">
     <p class="eyebrow">No app needed · Built for real events</p>
-    <h1>Collect Every Guest Photo in One QR Album</h1>
+    <h1>Free Photo Gallery for Every Event Guest</h1>
     <p>Guests scan your QR code and instantly upload photos and videos to one shared album. You keep everything organized in one gallery with privacy controls, moderation and ZIP export.</p>
     <div class="hero-actions">
       <a class="btn primary" href="https://app.myphotoqr.com/create">Create your album</a>
@@ -673,7 +675,7 @@ home_body = f"""
 <section class="cta-panel section-pad">
   <h2>Make photo sharing effortless from the first scan</h2>
   <p>Create one QR album and give every guest a simple path to upload photos, videos and memories while the event is still happening.</p>
-  <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a>
+  <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for {DISPLAY_PRICE}</a>
 </section>
 """
 
@@ -792,11 +794,11 @@ features_sections = [
 ]
 
 pricing_sections = [
-    """
+    f"""
 <section class="pricing-wrap section-pad">
   <article class="price-card">
     <p class="eyebrow">One-time payment</p>
-    <h2>$19.99</h2>
+    <h2>{DISPLAY_PRICE}</h2>
     <p class="price-note">One QR album for one event, with admin controls and one year of storage.</p>
     <a class="btn primary full" href="https://app.myphotoqr.com/create">Buy album</a>
     <ul class="check-list">
@@ -930,7 +932,7 @@ def event_page(event):
   <h1>{escape(event["hero_title"])}</h1>
   <p>{escape(event["hero_copy"])}</p>
   <div class="hero-actions">
-    <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a>
+    <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for {DISPLAY_PRICE}</a>
     <a class="btn secondary" href="how-it-works.html">See how it works</a>
   </div>
   <p class="microcopy">{escape(event["eyebrow"])}</p>
@@ -1035,14 +1037,14 @@ def event_page(event):
 
 
 home = page(
-    "MyPhotoQR | QR Album for Event Photo Sharing, No App Needed",
+    "Free Photo Gallery for Events | MyPhotoQR QR Album",
     "Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.",
     "",
     "img/og-myphotoqr.webp",
     home_body,
     [
         webpage_schema(
-            "MyPhotoQR | QR Album for Event Photo Sharing, No App Needed",
+            "Free Photo Gallery for Events | MyPhotoQR QR Album",
             "Create a QR album for your event. Guests scan a QR code, upload photos and videos from their browser, enjoy a live gallery, and download everything after the event.",
             "",
             "img/og-myphotoqr.webp",
@@ -1066,12 +1068,12 @@ home = page(
 )
 
 how = informational_page(
-    "How MyPhotoQR Works | Create, Share, Collect and Download Event Photos",
+    "Free Photo Gallery Setup | Create, Share and Collect Photos",
     "Learn how to create a QR album, personalize it, share QR links with guests, collect photos and videos in real time, and export your event memories.",
     "how-it-works.html",
     "img/feature-upload.webp",
     "Simple from the first scan",
-    "How MyPhotoQR works",
+    "Free photo gallery setup",
     "Create the album, share the QR code, collect guest uploads in real time and export the full archive after the event.",
     how_sections,
     FAQ_HOW,
@@ -1079,12 +1081,12 @@ how = informational_page(
 )
 
 features = informational_page(
-    "MyPhotoQR Features | QR Event Album, Live Gallery, Moderation and Export",
+    "Free Photo Gallery Features | QR Uploads, Slideshow and Export",
     "Explore MyPhotoQR features: custom QR album, guest photo and video uploads, live slideshow, privacy code, moderation, branding and ZIP export.",
     "features.html",
     "img/feature-slideshow.webp",
     "Made for event memories",
-    "Features that make event photo sharing easier",
+    "Free photo gallery features for events",
     "Everything you need to collect, organize, moderate, display and keep the best content from your event.",
     features_sections,
     FAQ_FEATURES,
@@ -1092,12 +1094,12 @@ features = informational_page(
 )
 
 pricing = informational_page(
-    "QR Photo Album Pricing | $19.99 One-Time Event Photo Sharing",
-    "Create a QR photo album for one event for $19.99. Guests upload photos and videos with no app, and you can download everything after the event.",
+    f"Free Guest Photo Gallery | {DISPLAY_PRICE} Host QR Album",
+    f"Create a QR photo album for one event for {DISPLAY_PRICE}. Guests upload photos and videos with no app, and you can download everything after the event.",
     "pricing.html",
     "img/feature-export.webp",
     "One event. One payment.",
-    "Simple pricing for your QR album",
+    "Simple $9.99 pricing for your QR gallery",
     "No monthly subscription. Buy one event album, share your QR code and collect guest media without ongoing fees.",
     pricing_sections,
     FAQ_PRICING,
@@ -1115,7 +1117,7 @@ pricing = informational_page(
             "image": absolute("img/feature-export.webp"),
             "offers": {
                 "@type": "Offer",
-                "price": "19.99",
+                "price": PRICE,
                 "priceCurrency": "USD",
                 "availability": "https://schema.org/InStock",
                 "url": f"{SITE_URL}/pricing.html",
@@ -1125,12 +1127,12 @@ pricing = informational_page(
 )
 
 support = informational_page(
-    "MyPhotoQR Support | Help for QR Albums, Guest Uploads and Event Galleries",
+    "Free Photo Gallery Support | QR Albums and Guest Uploads",
     "Get help with QR albums, guest uploads, live gallery, moderation, slideshow, download export, privacy settings and event setup.",
     "support.html",
     "img/scanning.webp",
     "Help when you need it",
-    "Support for your QR album",
+    "Free photo gallery support",
     "Questions about QR sharing, guest uploads, moderation, slideshow setup or final exports? This page covers the most common support topics.",
     support_sections,
     FAQ_SUPPORT,
@@ -1138,12 +1140,12 @@ support = informational_page(
 )
 
 events_hub = informational_page(
-    "Events QR Album Pages | MyPhotoQR Use Cases for Weddings, Parties and Trips",
+    "Free Photo Gallery Ideas | Weddings, Parties and Trips",
     "Explore QR album pages for weddings, birthdays, graduations, corporate events, quinceañeras, baby showers, group trips and more.",
     "events.html",
     "img/event-collage.webp",
     "Use cases and landing pages",
-    "QR album pages for every type of event",
+    "Free photo gallery ideas for every event",
     "Each event page explains how MyPhotoQR fits a specific celebration or gathering, with setup ideas, placement tips and answers to common questions.",
     events_hub_sections,
     [
@@ -1163,9 +1165,9 @@ events_hub = informational_page(
 INTENT_PAGES = [
     {
         "slug": "wedding-photo-sharing-qr-code",
-        "title": "Wedding Photo Sharing QR Code | No-App Guest Uploads",
+        "title": "Free Wedding Photo Gallery | No-App Guest Uploads",
         "description": "Create a wedding photo sharing QR code so guests can upload photos and videos from any phone browser. Collect candid guest photos in one private album.",
-        "heading": "Wedding photo sharing QR code for guest uploads",
+        "heading": "Free wedding photo gallery for guest uploads",
         "eyebrow": "Wedding QR photo sharing",
         "copy": "Use one QR code at the ceremony, reception and after-party so guests can upload wedding photos without downloading an app.",
         "image": "img/wedding-slideshow.webp",
@@ -1175,9 +1177,9 @@ INTENT_PAGES = [
     },
     {
         "slug": "qr-code-for-wedding-photos",
-        "title": "QR Code for Wedding Photos | Collect Guest Photos Online",
+        "title": "Free Photo Gallery QR Code | Collect Wedding Photos",
         "description": "Make a QR code for wedding photos and let guests upload from their phone browser. Build one live wedding album with moderation and ZIP export.",
-        "heading": "QR code for wedding photos",
+        "heading": "Free photo gallery QR code for wedding photos",
         "eyebrow": "Collect wedding guest photos",
         "copy": "Give guests a simple scan-to-upload path for ceremony moments, reception candids, dance-floor videos and family photos.",
         "image": "img/wedding-slideshow.webp",
@@ -1187,9 +1189,9 @@ INTENT_PAGES = [
     },
     {
         "slug": "collect-wedding-guest-photos",
-        "title": "Collect Wedding Guest Photos | QR Upload Album with No App",
+        "title": "Free Photo Gallery for Wedding Guests | No-App QR Album",
         "description": "Collect wedding guest photos with one QR upload album. Guests scan, upload from the browser and help you build a complete wedding gallery.",
-        "heading": "Collect wedding guest photos in one QR album",
+        "heading": "Free photo gallery for wedding guest photos",
         "eyebrow": "No app for guests",
         "copy": "Make it easy for guests to contribute candid photos and short videos before memories get lost in private messages.",
         "image": "img/event-collage.webp",
@@ -1199,9 +1201,9 @@ INTENT_PAGES = [
     },
     {
         "slug": "event-photo-sharing-qr-code",
-        "title": "Event Photo Sharing QR Code | Collect Guest Photos & Videos",
+        "title": "Free Event Photo Gallery QR Code | Collect Photos & Videos",
         "description": "Create an event photo sharing QR code for weddings, parties, graduations, corporate events and trips. Guests upload with no app and you export the archive.",
-        "heading": "Event photo sharing QR code for any gathering",
+        "heading": "Free event photo gallery QR code for any gathering",
         "eyebrow": "One upload link for guests",
         "copy": "Use one QR code to collect event photos and videos from guests, attendees, family, friends or coworkers.",
         "image": "img/event-collage.webp",
@@ -1211,9 +1213,9 @@ INTENT_PAGES = [
     },
     {
         "slug": "no-app-photo-sharing-for-events",
-        "title": "No-App Photo Sharing for Events | Browser QR Upload Album",
+        "title": "Free Photo Gallery for Events | Browser QR Uploads",
         "description": "Let guests share event photos without downloading an app. MyPhotoQR uses one QR code and a browser upload page for photos, videos and memories.",
-        "heading": "No-app photo sharing for events",
+        "heading": "Free no-app photo gallery for events",
         "eyebrow": "Browser-based uploads",
         "copy": "Guests scan a QR code, open the upload page and add photos or videos from the browser on iPhone, Android, tablet or desktop.",
         "image": "img/feature-upload.webp",
@@ -1223,9 +1225,9 @@ INTENT_PAGES = [
     },
     {
         "slug": "qr-photo-upload-for-events",
-        "title": "QR Photo Upload for Events | Guest Uploads from Any Phone",
+        "title": "Free Photo Gallery Uploads | Guests Add Photos by QR",
         "description": "Set up QR photo upload for events so guests can scan, upload and contribute photos or videos to one private event gallery.",
-        "heading": "QR photo upload for events",
+        "heading": "Free QR photo uploads for events",
         "eyebrow": "Scan, upload, collect",
         "copy": "Turn signs, table cards, slides and messages into upload prompts that feed one private event gallery.",
         "image": "img/scanning.webp",
@@ -1235,9 +1237,9 @@ INTENT_PAGES = [
     },
     {
         "slug": "live-event-photo-slideshow",
-        "title": "Live Event Photo Slideshow | Show Guest Uploads from a QR Album",
+        "title": "Free Photo Gallery Slideshow | Show Guest QR Uploads",
         "description": "Create a live event photo slideshow from guest uploads. Use MyPhotoQR to collect photos by QR code, moderate uploads and display approved moments.",
-        "heading": "Live event photo slideshow from guest uploads",
+        "heading": "Free photo gallery slideshow from guest uploads",
         "eyebrow": "Gallery and slideshow",
         "copy": "Collect photos by QR code and turn approved guest uploads into a live gallery or slideshow for a TV, projector or venue screen.",
         "image": "img/feature-slideshow.webp",
@@ -1333,7 +1335,7 @@ def intent_page(page_data):
 <section class="cta-panel section-pad">
   <h2>Create one QR album before the event starts</h2>
   <p>Give every guest one simple upload path and keep the final gallery organized from the first scan.</p>
-  <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for $19.99</a>
+  <a class="btn primary" href="https://app.myphotoqr.com/create">Buy album for {DISPLAY_PRICE}</a>
 </section>
 """
     schema = [
@@ -1358,12 +1360,12 @@ events_hub_sections.append(
 )
 
 events_hub = informational_page(
-    "Events QR Album Pages | MyPhotoQR Use Cases for Weddings, Parties and Trips",
+    "Free Photo Gallery Ideas | Weddings, Parties and Trips",
     "Explore QR album pages for weddings, birthdays, graduations, corporate events, quinceañeras, baby showers, group trips and more.",
     "events.html",
     "img/event-collage.webp",
     "Use cases and landing pages",
-    "QR album pages for every type of event",
+    "Free photo gallery ideas for every event",
     "Each event page explains how MyPhotoQR fits a specific celebration or gathering, with setup ideas, placement tips and answers to common questions.",
     events_hub_sections,
     [
