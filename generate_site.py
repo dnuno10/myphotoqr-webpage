@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 SITE_URL = "https://www.myphotoqr.com"
 TODAY = date.today().isoformat()
-PRICE = "9.99"
+PRICE = "19.99"
 DISPLAY_PRICE = f"${PRICE}"
 
 
@@ -1099,7 +1099,7 @@ pricing = informational_page(
     "pricing.html",
     "img/feature-export.webp",
     "One event. One payment.",
-    "Simple $9.99 pricing for your QR gallery",
+    f"Simple {DISPLAY_PRICE} pricing for your QR gallery",
     "No monthly subscription. Buy one event album, share your QR code and collect guest media without ongoing fees.",
     pricing_sections,
     FAQ_PRICING,
